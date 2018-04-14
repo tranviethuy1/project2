@@ -132,11 +132,7 @@
         <div class="form-group">
           <label class="col-md-4 control-label" ></label>  
           <div class="col-md-4">
-            <?php 
-            $id = $values['user']['id'];
-            $name = $values['user']['name'];
-            ?>
-            <a href="{{URL::Route('employeeback',array('id' => $id, 'name' => $name))}}" class="btn btn-success">Back to Home <i class="fas fa-chevron-right"></i></a>
+            <a href="{{Route('admin')}}" class="btn btn-success">Back to Home <i class="fas fa-chevron-right"></i></a>
           </div>
         </div>
 

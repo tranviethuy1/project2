@@ -166,8 +166,8 @@ ul{
 .content> .container{
 	margin-top: 20px;
 	margin-bottom: 20px;
-	border: 1px solid #00abff;
-	height: 900px;
+	/* border: 1px solid #00abff; */
+	height: auto;
 }
 .subscribe > .container{
 	
@@ -369,7 +369,7 @@ footer .information a {
   	.panel-body > li{
   		list-style-type: none;
   	}
-  	.panel-body > li :hover{
+  	.panel-body > li:hover{
 		background: #b2b2b2;
   	}
 /* text content */
@@ -377,11 +377,20 @@ footer .information a {
   		font-style: italic;
   		font-family: Antiqua;
   	}
-	
- /*username  */
- 	.username{
- 		margin-top: 30px;
- 		font-size: 20px;
- 		margin-left: 180px;
- 		font-family: Antiqua;
+
+ /* history */
+ 	.inputfind{
+ 		margin: 10px 0px 0px 10px;
+ 		width: 300px;
  	}
+	
+	.buttonfind{
+		margin-left: 10px;
+		width: 80px;
+		text-align: center;
+	}
+
+	.form-control{
+		line-height: 15px;
+		text-align: center;
+	}

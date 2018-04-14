@@ -24,8 +24,16 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'remember_token',
     ];
     
     public $timestamps = false;
+
+    public function link_user2project(){
+        return $this->belongsToMany('\App\Projects','links','id_employee','id_project');
+    }
+
+    public function link_user2link(){
+        return $this->hasMany('App\Links','id_employee','id');
+    }
 }

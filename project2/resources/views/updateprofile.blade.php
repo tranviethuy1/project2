@@ -9,12 +9,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>User profile </title>
-   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha256-3dkvEK0WLHRJ7/Csr0BZjAWxERc5WH7bdeUya2aXxdU= sha512-+L4yy6FRcDGbXJ9mPG8MT/3UCDzwR9gPeyFNMCtInsol++5m3bk2bXWKdZjvybmohrAsn3Ua5x8gfLnbE1YkOg==" crossorigin="anonymous">
-      <!-- Bootstrap Core CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+    <title>Update profile </title>
+ <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha256-3dkvEK0WLHRJ7/Csr0BZjAWxERc5WH7bdeUya2aXxdU= sha512-+L4yy6FRcDGbXJ9mPG8MT/3UCDzwR9gPeyFNMCtInsol++5m3bk2bXWKdZjvybmohrAsn3Ua5x8gfLnbE1YkOg==" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="{{URL::asset('fonts/font-awesome-4.7.0/css/fontawesome-all.min.css')}}">
-
+  <script src="{!! asset('js/status_information.js')!!}"></script>
 
     <!-- Custom CSS -->
     <style>
@@ -25,13 +23,15 @@
 
     .othertop{margin-top:10px;}
 
-    .avatar{
-      width: 160px;
-      height: 160px;
-    }
-
     </style>
-  <!-- Latest compiled and minified CSS -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
   <!-- Optional theme -->
@@ -40,17 +40,26 @@
   <!-- Latest compiled and minified JavaScript -->
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-  </head>
+</head>
 
 <body>
+    <?php 
+      $id = $values['user']['id'];
+      $name = $values['user']['name'];
+    ?>
   <div class="container">
     <div class="row">
       <div class="col-md-10 ">
-        <form class="form-horizontal">
+        <form class="form-horizontal" action="{{URL::Route('excuteupdate',array($id))}}" method="post" enctype="multipart/form-data">
+        {!! csrf_field() !!}
         <fieldset>
-
         <!-- Form Name -->
-        <legend style ="text-align: center;">User profile</legend>
+          <div class="status">
+            @if(isset($error))
+            <span class="alert alert-danger form-control" style="margin: auto;">{!! $error !!}</span>
+              @endif
+          </div>
+        <legend style ="text-align: center;">Update profile</legend>
 
         <!-- Text input-->
           <div class="form-group">
@@ -58,9 +67,15 @@
             <div class="col-md-4">
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                <input id="Name" name="name" type="text" value="<?php echo $values['user']['name'] ;?>" class="form-control input-md" disabled>
+                <input id="Name" name="name" type="text" value="<?php echo $values['user']['name'] ;?>" class="form-control input-md">
               </div>
             </div>
+          </div>
+
+        <!-- File Button --> 
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="Upload photo">Upload photo</label>
+            <div class="col-md-4"><input id="photo" name="avatar" class="input-file" type="file"></div>
           </div>
 
         <!-- Text input-->
@@ -69,7 +84,7 @@
           <div class="col-md-4">
             <div class="input-group">
                <div class="input-group-addon"><i class="fa fa-birthday-cake"></i></div>
-               <input id="Date Of Birth" name="Date Of Birth" type="text" value ="<?php echo $values['imformation']['birth'] ;?>" class="form-control input-md" disabled>
+               <input id="Date Of Birth" name="birth" type="text" value ="<?php echo $values['imformation']['birth'] ;?>" class="form-control input-md">
             </div>
           </div>
         </div>
@@ -80,21 +95,11 @@
           <div class="col-md-4">
             <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-envelope fa" style="font-size: 20px;"></i></div>
-                <input id="email" name="email" type="text" value="<?php echo $values['user']['email'] ;?>" class="form-control input-md" disabled>
+                <input id="email" name="email" type="text" value="<?php echo $values['user']['email'] ;?>" class="form-control input-md" >
             </div>
           </div>
         </div>
 
-        <!-- Text input-->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="password">Password</label>  
-          <div class="col-md-4">
-            <div class="input-group">
-              <div class="input-group-addon"><i class="fa fa-lock fa-lg" style="font-size: 20px;"></i></div>
-              <input id="password" name="password" type="text" value ="<?php echo $values['user']['password'] ;?>" class="form-control input-md" disabled>
-            </div>
-          </div>
-        </div>
 
         <!-- Multiple Radios (inline) -->
         <div class="form-group">
@@ -102,7 +107,7 @@
           <div class="col-md-4"> 
             <div class="input-group">
               <div class="input-group-addon"><i class="fa fa-male" style="font-size: 20px;"></i></div>
-              <input id="password" name="gender" type="text" value="<?php if($values['imformation']['male'] == 1){echo "Male";}else{echo "FeMale";} ;?>" class="form-control input-md" disabled>
+              <input id="gender" name="gender" type="text" value="<?php if($values['imformation']['male'] == 1){echo "Male";}else{echo "FeMale";} ;?>" class="form-control input-md" >
             </div>
           </div>
         </div>
@@ -113,7 +118,7 @@
           <div class="col-md-4">
             <div class="input-group">
               <div class="input-group-addon"><i class="fa fa-phone"></i></div>
-              <input id="Phone number " name="phone" type="text" value="<?php echo $values['imformation']['phone'] ;?>" class="form-control input-md" disabled>
+              <input id="Phone " name="phone" type="text" value="<?php echo $values['imformation']['phone'] ;?>" class="form-control input-md" >
             </div>
           </div>
         </div>
@@ -124,7 +129,7 @@
           <div class="col-md-4">
             <div class="input-group">
               <div class="input-group-addon"><i class="fa fa-address-book"></i></div>
-              <input id="Email Address" name="Email Address" type="text" value="<?php echo $values['imformation']['address'] ;?>" class="form-control input-md" disabled>
+              <input id="Email Address" name="address" type="text" value="<?php echo $values['imformation']['address'] ;?>" class="form-control input-md" >
             </div>
           </div>
         </div>
@@ -136,7 +141,8 @@
             $id = $values['user']['id'];
             $name = $values['user']['name'];
             ?>
-            <a href="{{URL::Route('employeeback',array('id' => $id, 'name' => $name))}}" class="btn btn-success">Back to Home <i class="fas fa-chevron-right"></i></a>
+          <button type="submit" class="btn btn-success">Upload Profile<i class="fas fa-file"></i></button>  
+          <a href="{{URL::Route('employeeback',array('id'=>$id,'name'=>$name))}}" class="btn btn-danger" value="">Back to home<i class="fas fa-arrow-circle-right"></i></a> 
           </div>
         </div>
 
@@ -146,7 +152,7 @@
 
       <div class="col-md-2 hidden-xs">
         @if(isset($values['imformation']['avatar']))
-          <img src = "{!! asset($values['imformation']['avatar']) !!}" class="avatar">
+          <img style ="width: 160px;height: 160px;"  src = "{!! asset($values['imformation']['avatar']) !!}" class="avatar">
         @else
           <img src='http://websamplenow.com/30/userprofile/images/avatar.jpg' class='img-responsive img-thumbnail'>
         @endif

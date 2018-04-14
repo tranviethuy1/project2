@@ -22,18 +22,21 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
-					<img src="{{URL::asset('images/img-01.png')}}" alt="IMG">
+					<img class="image" src="{{URL::asset('images/login.jpg')}}" alt="IMG">
+					<p class= "text-info admin">Ứng dụng quản lý công tác phí </p>
+					<p class= "text-info admin">Teacher:Dr. Vũ Thị Hương Giang </p>
+					<p class= "text-info admin">Make by:Trần Viết Huy</p>
+					<p class= "text-info admin">Student number:20151716</p>
 				</div>
 
 				<form class="login100-form validate-form" action="{{route('login')}}" method="post">
 					{!! csrf_field() !!}
 					<span class="login100-form-title">
-						WELCOME
+						<p class="text-info welcome">Welcome to application</p>
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
@@ -70,7 +73,6 @@
 							<?php
 								if(session()->has('error')){
 									echo session('error');
-									session()->forget('error');
 								}
 							?>
 						</a>

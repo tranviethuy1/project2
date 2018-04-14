@@ -14,8 +14,16 @@
 		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
 		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 		
-		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<!-- js -->
+		<script src="{!! asset('js/status_information.js')!!}"></script>
 		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 		<title>Create account</title>
 		<style type="text/css" media="screen">
@@ -23,43 +31,29 @@
 				background-color: #d3d3d3; 
 			}
 		</style>
-		<script type="text/javascript">
-			function alertError(value){
-				if(value.length != 0){
-					alert(value);
-				}
-			}
-
-			function alertInserted(value){
-				alert(value);
-			}
-		</script>
 	</head>
 	<body>
-		<script type="text/javascript">
-			<?php if(session()->has('error')){ ?>
-			var value = '<?php echo session('error'); ?>';
-			alertError(value);
-			<?php session()->forget('error');} ?>
-		</script>	
-		
-		<script type="text/javascript">
-			<?php if(isset($alert)){ ?>
-			var value = '<?php echo $alert; ?>';
-			alertInserted(value);
-			<?php } ?>
-		</script>
 
 		<div class="container">
 			<div class="row main">
 				<div class="panel-heading">
-	               <div class="panel-title text-center">
+
+					<div class="status">
+						@if(session('error'))
+						<span class="alert alert-danger form-control" style="margin: auto;line-height: 10px;">{!! session('error') !!}</span>
+					    @endif
+					    @if(isset($alert))
+					    <span class="alert alert-success form-control" style="margin: auto;line-height: 10px;">{!! $alert !!}</span>
+					    @endif
+					</div>
+
+	               	<div class="panel-title text-center">
 	               		<h1 class="title">Create Account</h1>
 	               		<hr />
 	               	</div>
 	            </div> 
 				<div class="main-login main-center">
-					<form class="form-horizontal" method="POST" action="{{route('addaccount')}}">
+					<form class="form-horizontal" method="post" action="{{Route('addaccount')}}">
 					{{ csrf_field() }}	
 						<div class="form-group">
 							<label for="name" class="cols-sm-2 control-label">Your Name</label>

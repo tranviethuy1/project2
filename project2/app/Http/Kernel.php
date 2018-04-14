@@ -60,5 +60,14 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'checkimfor' => \App\Http\Middleware\Checkimformations::class,
+        'checkbeforeupdate' => \App\Http\Middleware\Checkbeforeupdate::class,
+        'checkchangepass' => \App\Http\Middleware\Checkchangepass::class,
+        'checkadvance' => \App\Http\Middleware\Checkadvance::class,
+        'checklogin' => \App\Http\Middleware\Checklogin::class,
+        'checkaddproject' => \App\Http\Middleware\Checkaddproject::class,
+        'checkchangepassadmin' => \App\Http\Middleware\Checkchangepassadmin::class,
+        'checkbeforeupdateadmin' => \App\Http\Middleware\Checkbeforeupdateadmin::class,
+        'checkplanadd' => \App\Http\Middleware\Checkplanadd::class,
+        'checkplanupdate' => \App\Http\Middleware\Checkplanupdate::class,
     ];
 }
