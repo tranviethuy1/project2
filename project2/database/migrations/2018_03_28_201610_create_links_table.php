@@ -18,7 +18,7 @@ class CreateLinksTable extends Migration
             $table->integer('id_employee')->unsigned();
             $table->integer('id_project')->unsigned();
             $table->foreign('id_employee')->references('id')->on('users');
-            $table->foreign('id_project')->references('id')->on('projects');
+            $table->foreign('id_project')->references('id')->on('projects'); 
         });
     }
 

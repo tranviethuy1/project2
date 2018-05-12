@@ -10,16 +10,15 @@
 	}
 	.updatetime{
 		font-family:Antiqua;
-		font-style: italic;
 	}
 	.center{
 		margin: auto;
 	}
 	</style>
-	<div class="row"><h4 class ="text-info" style = "margin: auto;font-family:Antiqua;font-style: italic;">Notices</h4></div>
+	<div class="row"><legend class ="text-info" style = "font-family:Antiqua; margin-left: 10px;">Notices</legend></div>
 	@foreach($notices as $notice)
-		<div class="row" style="margin-top:12px; "><h4 class ="text-info" style ="font-family:Antiqua ;font-size: 18px;font-style: italic; margin-left:20px;"><a href="{{Route('displaynotice',array('id_notice'=>$notice->id_notice))}}">{{$notice->title}}</a></h4></div>
-		<div class ="time"><h5 class="timeupdate">{{$notice->create_at}}</h5></div>
+		<div class="row" style="margin-top:12px; "><h4 class ="text-info" style ="font-family:Antiqua ;font-size: 18px;font-style: italic; margin-left:20px;"><a href="{{Route('displaynotice',array('id_notice'=>$notice->id))}}">{{$notice->title}}</a></h4></div>
+		<div class ="time"><h6 class="timeupdate">{{$notice->create_at}}</h6></div>
 	@endforeach
 	<div class= "row">
 		<ul class="pagination center">

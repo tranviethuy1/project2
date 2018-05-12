@@ -21,10 +21,15 @@ class Checkchangepass
         $user = DB::table('users')->select('password','email')->where('id',$id)->first();
         $email = $user->email;
         
-        if(empty($pass)||empty($newpass)||empty($confirmpass)){
-            return redirect()->Route('changepassfail',array('id'=>$id ,'email'=>$email ,'alert'=>'It is not enough data'));
+        if(empty($pass)){
+            return redirect()->Route('changepassfail',array('id'=>$id ,'email'=>$email ,'alert'=>'Password is empty'))->with('pass','Password is empty');
+        }
+        elseif(empty($newpass)){
+            return redirect()->Route('changepassfail',array('id'=>$id ,'email'=>$email ,'alert'=>'New Password is empty'))->with('new','New Password is empty');
+        }elseif(empty($confirmpass)){
+            return redirect()->Route('changepassfail',array('id'=>$id ,'email'=>$email ,'alert'=>'Corfirm Password is empty'))->with('confirm','Corfirm Password is empty');
         }elseif(!password_verify($pass,$user->password)){
-            return redirect()->Route('changepassfail',array('id'=>$id ,'email'=>$email ,'alert'=>'Your password incorrect'));
+            return redirect()->Route('changepassfail',array('id'=>$id ,'email'=>$email ,'alert'=>'Your password is incorrect'))->with('pass','Your password is incorrect');
         }elseif($newpass != $confirmpass){
             return redirect()->Route('changepassfail',array('id'=>$id ,'email'=>$email ,'alert'=>'New password and confirmpass are diffirent!'));
         }

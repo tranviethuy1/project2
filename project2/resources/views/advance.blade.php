@@ -1,10 +1,6 @@
 @extends('layout.master')
 @section('rightcontent')
-<style>
-	.inputstyle{
-		width: 150px;
-	}
-</style>
+
 	<div class = "row">
 		<div class="col-md-12 ">
 			@if(isset($project))
@@ -16,48 +12,83 @@
 				<div class="status">
 		            @if(isset($alert_advance))
 		            <span class="alert alert-success form-control" style="margin: auto;">{!! $alert_advance !!}</span>
-		             @endif
+		            @endif
 		        </div>
 				<legend class ="text-info" style ="text-align: left;">Advance</legend>
 
-				<div class ="form-group">
-					<label class="control-label col-md-2" for="Project_name">Project Name:</label>
-					@if(isset($project))
-					<div class="col-md-4" ><p style="font-family:Antiqua;font-style: italic;line-height: 30px;text-align: left;">{{$project['name_project']}}</p></div>
+				@if(isset($project))					
+					@if($project['status'] == 1)
+					<legend class ="text-warning" style ="text-align: center;font-family: Tahoma; font-weight:700; font-size: 20px;">
+						Advance is warning
+					</legend>	
+						@if(isset($refuses))
+							<div style="text-align: center; height: 50px;"><span class="fas fa-envelope-square"><a href="{{Route('seemessagerefuse',array($project['id']))}}"> Click here to see message</a></span></div>
+						@endif
+					@endif	
+					@if($project['status'] == 2)
+					<legend class ="text-success" style ="text-align: center;font-family: Tahoma; font-weight:700; font-size: 20px;">
+						Advance is accepted
+					</legend>
 					@endif
+				@endif
+					
+				<hr>
+					
+				<div class ="form-group">
+					<div class="row">
+						<label class="control-label col-md-2" for="Project_name">Project Name:</label>
+						@if(isset($project))
+						<div class="col-md-4"><input class="form-control" type="text" name="pn" id="pn" value="{{$project['name_project']}}" disabled></div>
+						@endif
+					</div>	
 				</div>
 
 				<div class="form-group">
-					<label class="control-label col-md-2" for="Project_name">Rent House:</label>	
-					<div class="col-md-3">				
-						<div class="form-check">
-     						<label class="form-check-label"> Bộ trưởng</label>
-     						<input type="radio" class="form-check-input" name="posision" value="1">
-   						</div>
-    					<div class="form-check">
-							<label class="form-check-label">Thứ trưởng</label>
-     						<input type="radio" class="form-check-input" name="posision" value="2">
-   						</div>
-    					<div class="form-check ">
-							<label class="form-check-label">Đối tượng còn lại</label>
-     						<input type="radio" class="form-check-input" name="posision" value="3" checked>
-    					</div>
-					</div>
-					<div class="col-md-3">
-						<div class="form-check">
-     						<label class="form-check-label"> Vùng I</label>
-     						<input type="radio" class="form-check-input" name="area" value="1">
-   						</div>
-    					<div class="form-check">
-							<label class="form-check-label">Vùng còn lại</label>
-     						<input type="radio" class="form-check-input" name="area" value="2" checked>
-   						</div>
-					</div>	
-					<div class="col-md-4">
-						<label class="form-check-label" for="pn">Số ngày công tác dự kiến:</label>
-						<input style="text-align: center;" type="text" value="<?php if(isset($plan)){ echo number_format($plan->days);}?>" name="day" disabled>
-						<span class="text-info">days</span>
-					</div>	
+					<div class="row">
+						<label class="control-label col-md-2" for="rh">Rent House:</label>	
+						<div class="col-md-3">				
+							<div class="form-check">
+	     						<label class="form-check-label"> Bộ trưởng </label>
+	     						<input type="radio" class="form-check-input radio" name="posision" value="1">
+	   						</div>
+
+	    					<div class="form-check">
+								<label class="form-check-label">Thứ trưởng</label>
+	     						<input type="radio" class="form-check-input radio" name="posision" value="2">
+	   						</div>
+
+	    					<div class="form-check ">
+								<label class="form-check-label">Đối tượng còn lại</label>
+	     						<input type="radio" class="form-check-input radio" name="posision" value="3" checked>
+	    					</div>
+						</div>
+
+						<div class="col-md-3">
+							<div class="form-check">
+	     						<label class="form-check-label"> Vùng I</label>
+	     						<input type="radio" class="form-check-input radio" name="area" value="1">
+	   						</div>
+	    					<div class="form-check">
+								<label class="form-check-label">Vùng còn lại</label>
+	     						<input type="radio" class="form-check-input radio" name="area" value="2" checked>
+	   						</div>
+						</div>	
+						
+						<div class="col-md-4">
+							<div class="form-group">
+								<label class="control-label" for="d">Số ngày công tác dự kiến:</label>
+								@if(!isset($day))
+								<input type="number" class="form-control" name="day" value="<?php if(isset($plan)){ echo $plan->days;}?>">
+								@else
+								<input type="number" class="form-control" name="day" value="<?php echo $day; ?>">
+								@endif
+
+								@if(session()->has('days'))
+									<span class="text-danger">{!! session('days')!!}</span>
+								@endif
+							</div>
+						</div>
+					</div>		
 				</div>
 
 				<div class="form-group">
@@ -75,44 +106,62 @@
 
 
 				<div class ="form-group">
-					<label class="control-label col-md-3" for="Travel-cost">Travel-cost</label>
-					<div class="col-md-9" >
-						<input type="text" class="inputstyle" placeholder="Enter a number" name="travel_cost"><span>VNĐ</span>
-						<span class="text-info">(**Bao gồm tiền đi trong toàn bộ chuyến công tác**) </span>
-					</div>
+					<div class="row">
+						<label class="control-label col-md-2" for="Travel-cost">Travel-cost</label>
+						<div class="col-md-3" >
+							<input type="text" class="form-control" placeholder="Money for travelling" name="travel_cost" >
+						</div>
+						<div class="col-md-7">
+							<span class="text-info">(**Bao gồm tiền đi trong toàn bộ chuyến công tác**) </span>
+						</div>
+					</div>	
 				</div>
 
 				<div class ="form-group">
-					<label class="control-label col-md-3" for="Project_name">Postage</label>
-					<div class="col-md-9" >
-						<input type="text" class="inputstyle" placeholder="Enter a number" name="postage"><span>VNĐ</span>
-						<span class="text-info">(**Cước, phí di chuyển cho bản thân và phương tiện**) </span>
-					</div>
+					<div class="row">
+						<label class="control-label col-md-2" for="pt">Postage</label>
+						<div class="col-md-3" >
+							<input type="text" class="form-control" placeholder="Money for postage" name="postage">
+						</div>
+						<div class="col-md-7">	
+							<span class="text-info">(**Cước, phí di chuyển cho bản thân và phương tiện**) </span>
+						</div>
+					</div>	
 				</div>
 
 				<div class ="form-group">
-					<label class="control-label col-md-3" for="Project_name">Postage-documment</label>
-					<div class="col-md-9" >
-						<input type="text" class="inputstyle" placeholder="Enter a number" name="postage_document"><span>VNĐ</span>
-						<span class="text-info">(**Cước tài liệu, thiết bị, dụng cụ, đạo cụ của chuyến công tác **) </span>
+					<div class="row">
+						<label class="control-label col-md-2" for="pd">Postage-documment</label>
+						<div class="col-md-3" >
+							<input type="text" class="form-control" placeholder="Postage_document" name="postage_document">
+						</div>
+						<div class="col-md-7">	
+							<span class="text-info">(**Cước tài liệu, thiết bị, dụng cụ, đạo cụ của chuyến công tác**) </span>
+						</div>
 					</div>
 				</div>
 				
 				<div class ="form-group">
-					<label class="control-label col-md-3" for="Project_name">Other</label>
-					<div class="col-md-9" >
-						<input type="text" class="inputstyle" placeholder="Enter a number" name="others"><span>VNĐ</span>
-						<span class="text-info">(**Cước hành lý của người đi công tác **) </span>
+					<div class="row">
+						<label class="control-label col-md-2" for="o">Other</label>
+						<div class="col-md-3" >
+							<input type="text" class="form-control" placeholder="Money for others" name="others">
+						</div>
+						<div class="col-md-7">	
+							<span class="text-info">(**Cước hành lý của người đi công tác **) </span>
+						</div>
 					</div>
 				</div>
 				
 				<div class="form-group">
-          		<label class="col-md-3 control-label" ></label>  
-          			<div class="col-md-4">
-          				<div class="btn-group-btn-group-lg">
-		         		<button type="submit" class="btn btn-success"  <?php if(!isset($project)|| (isset($project) && $project['status'] == 2)){echo"disabled";}?> >Advance or Update<i class="fas fa-arrow-circle-right" ></i></button>
-		         		</div>  
-		         	</div>
+					<div class="row">
+	          			<label class="col-md-2 control-label" ></label>  
+	          			<div class="col-md-4">
+	          				<div class="btn-group-btn-group-lg">
+			         		<button type="submit" class="btn btn-success"  <?php if(!isset($project)|| (isset($project) && $project['status'] == 2)){echo"disabled";}?> >Advance or Update <i class="fas fa-arrow-circle-right" ></i></button>
+			         		</div>  
+			         	</div>
+			         </div>
         		</div>
 
 			</form>
@@ -120,8 +169,8 @@
 	</div>
 
 	<div class="row">
-		<p>Information on the last loan, you can update to fix before Admin accept:</p>
-		<table class="table table-hover">
+		<p style="margin-left: 10px;">Information on the last loan, you can update to fix before Admin accept:</p>
+		<table class="table table-bordered table-hover" style="margin-left:10px; ">
 		    <thead>
 		      <tr>
 		        <th>Project_name</th>
@@ -129,19 +178,21 @@
 		        <th>Cost_travel</th>
 		        <th>Rent_house</th>
 				<th>Postage</th>
-				<th>Postage_document</th>
+				<th>Document</th>
 				<th>Other</th>
+				<th>Total</th>
 		      </tr>
 		    </thead>
 		    <tbody>
 		      <tr>
 		        <td><?php if(isset($project)){echo $project['name_project'];} ?></td>
 		        <td><?php if(isset($advance)){echo $advance->advance_date;} ?></td>
-		        <td><?php if(isset($advance)){echo $advance->travel_cost;} ?></td>
-		        <td><?php if(isset($advance)){echo $advance->rent_house;} ?></td>
-		        <td><?php if(isset($advance)){echo $advance->postage;} ?></td>
-		        <td><?php if(isset($advance)){echo $advance->postage_document;} ?></td>
-		        <td><?php if(isset($advance)){echo $advance->others;} ?></td>
+		        <td><?php if(isset($advance)){echo number_format($advance->travel_cost);} ?></td>
+		        <td><?php if(isset($advance)){echo number_format($advance->rent_house);} ?></td>
+		        <td><?php if(isset($advance)){echo number_format($advance->postage);} ?></td>
+		        <td><?php if(isset($advance)){echo number_format($advance->postage_document);} ?></td>
+		        <td><?php if(isset($advance)){echo number_format($advance->others);} ?></td>
+		        <td><?php if(isset($advance)){echo number_format($advance->travel_cost+$advance->rent_house+$advance->others+$advance->postage+$advance->postage_document).' VNĐ';} ?></td>
 		      </tr>
 		    </tbody>
   		</table>

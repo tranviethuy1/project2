@@ -26,7 +26,7 @@ class CreateResultsTable extends Migration
             $table->date('date_finish')->nullable();
             $table->integer('id_project')->unsigned();
             $table->foreign('id_project')->references('id')->on('projects');
-            $table->foreign('id_employee_r')->references('id')->on('users');
+            $table->foreign('id_employee_r')->references('id')->on('users'); 
         });
     }
 

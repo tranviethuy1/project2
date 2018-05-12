@@ -6,10 +6,9 @@
 	<title>Employee Page</title>
 	<!-- bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<!-- css -->
-	<link rel="stylesheet" type="text/css" href="{{URL::asset('css/employee.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{asset('css/employee.css')}}">
 	<!-- font -->
 	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:100" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('fonts/font-awesome-4.7.0/css/fontawesome-all.min.css')}}">
@@ -21,9 +20,10 @@
 </head>
 <body>
 	<?php 
-			$id = session('data')['id'];
+			$id = session('data')['id']; 
 			$name = session('data')['name'];
 	?>
+
 	<header>
 		<div class="header--toolbar">
 			<div class="container">
@@ -51,7 +51,7 @@
 
 					<div class="header--button col-md-6">
 						<div class="btn-group">
-							<button type="button" class="btn btn-light"><i class="fas fa-comment-alt"></i> Messenger</button>
+							<button type="button" class="btn btn-light"><i class="fas fa-external-link-alt"></i><a class="text-dark" href="{{Route('introduce')}}"> Introduce</a></button>
 	  						<button type="button" class="btn btn-light"><i class="fas fa-location-arrow"></i> Question</button>
 	  						
 	  						<div class="btn-group">
@@ -59,39 +59,70 @@
 	  							<div class="dropdown-menu">
 	  								<form action="{{URL::Route('profile',array($id))}}" method="get" accept-charset="utf-8">
 		  								<button type="submit" class="btn btn-light dropdown-item">
-		  									<i class="fas fa-user-circle"></i><a>Profile</a>
+		  									<i class="fas fa-user-circle"></i><a> Profile</a>
 		  								</button>
 		  							</form>
 		  							<form action="{{URL::Route('updateprofile',array($id))}}" method="get" accept-charset="utf-8">
 		  								<button type="submit" class="btn btn-light dropdown-item">
-		  									<i class="fas fa-edit"></i><a>Update</a>
+		  									<i class="fas fa-edit"></i><a> Update</a>
 		  								</button>
 		  							</form>
 		  							<form action="{{URL::Route('changepass',array($id))}}" method="get" accept-charset="utf-8">
 		  								<button type="submit" class="btn btn-light dropdown-item">
-		  									<i class="fas fa-key"></i><a>Change Pass</a>
+		  									<i class="fas fa-key"></i><a> Change Pass</a>
 		  								</button>
 		  							</form>		  							
 		  							<form action="{{route('logout')}}" method="get" accept-charset="utf-8">	
 	  								<button type="submit" class="btn btn-light dropdown-item">
-										<i class="fas fa-sign-out-alt"></i><a href="{{Route('logout')}}">Logout</a>
+										<i class="fas fa-sign-out-alt"></i><a class="text-dark" href="{{Route('logout')}}"> Logout</a>
 									</button>
 									</form>
 	  							</div>
 	  						</div>
 						</div>
+
+						<div class="row" style="margin-left: 350px;">
+  							<span class="text-danger" style="font-weight: 700;">
+								 Xin chào : 
+							</span>
+							<span class="text-info" style="font-weight: 700; font-family: Tahoma;">
+							{{session('data')['name']}}
+							</span>								
+  						</div>	
 					</div>
 				</div>
 			</div>
 			
 		</div>
+<!-- 	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#slideshow > div:gt(0)").hide();
+			setInterval(function() { 
+			  $('#slideshow > div:first')
+			    .fadeOut(1000)
+			    .next()
+			    .fadeIn(1000)
+			    .end()
+			    .appendTo('#slideshow');
+			},  3000);
+		});
+	</script> -->
 
 		<div class="header--inner header--pc">
-			<div class="container">
-				<div class = "row ">
-					<p class ="text-info" style="margin: auto;font-size: 20px;"><?php echo "Hello ".$name." ";?><i class ="fas fa-heart"></i><i class ="fas fa-heart"></i><i class ="fas fa-heart"></i></p>
+				<div class ="row">
+					<div class="col-md-3">
+						<img src="{{asset('images/law.png')}}" alt="congtac" style="margin-left:50px; height: 260px;width: 280px;">	
+					</div>
+					<div class="col-md-6">
+						<div id="slideshow">
+							<div><img src="{{asset('images/congtac.jpg')}}" style="height: 260px;width: 630px;margin-left:30px; "></div>
+							<!-- <div><img src="{{asset('images/congtac2.jpg')}}" style="height: 260px;width: 630px;"></div> -->
+						</div>
+					</div>
+					<div class="col-md-3">
+						<img src="{{asset('images/bachkhoa.png')}}" alt="congtac" style="height: 260px;width: auto;margin-left:20px; ">	
+					</div>
 				</div>
-			</div>
 		</div>
 
 	</header>
@@ -102,17 +133,20 @@
 			<!-- Sidebar -->
 			<div class="row">
 				<div class="col-md-3 panel">
-				    <div class="panel panel-default" style ="background: #f5f5f5; height: 925px;">
-					    <div class="panel-heading title_home"><i class="fas fa-home"></i><a href="{{Route('employeepage')}}">Home</a></div>
+				    <div class="panel panel-default sidebar">
+					    <div class="panel-heading title_home"><i class="fas fa-home"></i><a href="{{Route('employeepage')}}" class="title">Home</a></div>
 					    <div class="panel-body"><li><i class="fas fa-check-square"></i><a href="{{URL::Route('checkproject',array($id))}}" class="title">Check project</a></li></div>
 					    <div class="panel-body"><li><i class="fas fa-clipboard"></i><a href="{{Route('advanceview',array($id))}}" class="title">Advance</a></li></div>
-					    <div class="panel-body"><li><i class="fas fa-history"></i><a href="{{Route('history',array($id))}}" class="title">Histoty</a></li></div>
+					    <div class="panel-body"><li><i class="fas fa-history"></i><a href="{{Route('history',array($id))}}" class="title">History</a></li></div>
 					    <div class="panel-body"><li><i class="fas fa-book"></i><a href="{{Route('payment',array($id))}}" class="title">Payment</a></li></div>
 					    <div class="panel-body"><li><i class="fas fa-envelope-open"></i><a href="{{Route('loadnotices')}}" class="title">Notice</a></li></div>
+					    <div class="panel-body"><li><i class="fas fa-file"></i><a href="{{Route('listtemplate')}}" class="title">Template</a></li></div>
+						<div class="panel-body"><video src="http://www.w3schools.com/html/mov_bbb.mp4" width="285" height="285" controls loop>Your browser does not support.</video></div>
+						<div class="panel-body"><iframe src="https://player.vimeo.com/video/11774747" width="285" height="285" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 				    </div>
 				</div>
 
-				<div class="col-md-9" >
+				<div class="col-md-9">
 					<div class="status">
 						@if(session('alert'))
 						<span class="alert alert-danger form-control">{!! session('alert') !!}</span>

@@ -1,0 +1,110 @@
+.profile{
+	background: url(asset(IMG/profile.jpg)) no-repeat;
+	background-size: cover;
+	padding: 30px 0px 30px 0px;
+}
+.profile > .container{
+	
+}
+.col--5--left{
+	background-image: -webkit-linear-gradient(top,#683bb2 0%,#629ed4 50%, #55d8fb 100% );
+	opacity: 0.8;
+}
+.big--avatar{
+	width: 60%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30%;
+	height: 300px;
+}
+.thoi{
+	
+	padding: 10px;
+}
+.thoi4{
+	border: 1px solid white;
+}
+.thoi3{
+	border: 1px solid #e2e7f1;
+}
+.thoi2{
+	border: 1px solid #d9e5fd7d;
+}
+.thoi1{
+	border: 1px solid #e2e7f142;
+}
+.big--name{
+	color: white;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: 'Josefin Sans', sans-serif;
+}
+.big-back-to-home{
+	border: none;
+	margin-top: 20px;
+}
+.big-back-to-home a{
+	background-color: white;
+	color: #da00ff;
+	border: none;
+	font-size: 24px;
+
+}
+.big-back-to-home > .update{
+	padding: 6px 15px;
+	float: right;
+}
+.big-back-to-home:hover .big-back-to-home a{
+	color: #1d00ffe6;
+}
+.profile--content{
+	height: 100%;
+	width: 100%;
+	background: white;
+}
+.profile--avatar{
+	width: 35%;
+	margin-right: auto;
+	margin-left: auto;
+	padding-top: 30px;
+}
+.profile--name{
+	text-align: center;
+	color:#645eaf;
+	font-size: 24px;
+	font-family: 'Josefin Sans', sans-serif;
+	margin-top: 20px;
+}
+.profile--contact{
+	background-image: -webkit-linear-gradient(-135deg,#c87dfd 0%,#95b8fc 50%, #74dafb 100% );
+	color:white;
+	margin-bottom: 20px;
+	font-family: 'Josefin Sans', sans-serif;
+	padding: 10px 10px 10px 30px;
+}
+.profile--infor{
+	background-image: -webkit-linear-gradient(-135deg,#c87dfd 0%,#95b8fc 50%, #74dafb 100% );
+	color:white;
+	margin-bottom: 20px;
+	font-family: 'Josefin Sans', sans-serif;
+	padding: 10px 10px 10px 30px;
+	margin-bottom: 0px!important;
+	
+}
+.col--5-right p{
+	margin-bottom: 10px!important;
+}
+.profile--title{
+	font-family: 'Quicksand', sans-serif;
+	font-size: 16px;
+}
+.profile--title > i{
+	font-size: 24px;
+	margin-right: 20px;
+	margin-top: 5px;
+}
+.profile--data{
+	font-size: 20px;
+	margin-left: 48px;
+}

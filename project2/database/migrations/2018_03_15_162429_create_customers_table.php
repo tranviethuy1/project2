@@ -21,7 +21,7 @@ class CreateCustomersTable extends Migration
             $table->string('phone',12);
             $table->string('avatar')->nullable();
             $table->integer('id_employee')->unsigned();
-            $table->foreign('id_employee')->references('id')->on('users');
+            $table->foreign('id_employee')->references('id')->on('users'); 
         });
     }
 

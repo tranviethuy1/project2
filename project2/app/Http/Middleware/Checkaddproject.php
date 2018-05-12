@@ -19,10 +19,14 @@ class Checkaddproject
         $date_start = $request->date_start;
         $describe = $request->describe;
 
-        if(empty($project_name) || empty($date_start) || empty($describe)){
-            return redirect('admin')->with('alert','You must enter all information');
+        if(empty($project_name)){
+            return redirect('admin')->with('name','Name project is empty');
+        }elseif(empty($date_start)){
+            return redirect('admin')->with('date','Date start is empty');
+        }elseif(empty($describe)){
+            return redirect('admin')->with('describe','Describe start is empty');
         }elseif(!preg_match("/^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/",$date_start)){
-            return redirect('admin')->with('alert','Unvalid Date format');
+            return redirect('admin')->with('date','Unvalid Date format yyyy-mm-dd');
         }
         return $next($request);
     }

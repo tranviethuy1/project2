@@ -8,10 +8,17 @@ header{
 	width: auto;
 	background-color: #f8f8f8 ; 
 }
+tr{
+	text-align: center;
+}
+.headerimg{
+	width: 1322px;
+	height: 350px;
+}
 /* sidebar */
 .sidebar{
 	background: #f5f5f5;
-	height: 800px;
+	height: 1200px;
 	border: 1px solid #e5e5e5;
 }
 
@@ -25,10 +32,12 @@ p.title_header{
 .panel-body > li{
 	height: 50px;
 	list-style-type: none;
+	border: 1px solid #e5e5e5;
 }
 .panel-heading{
 	height: 50px;
 	list-style-type: none;
+	border: 1px solid #e5e5e5;
 }
 
 .panel-heading:hover{
@@ -40,14 +49,14 @@ p.title_header{
 .title{
 	text-decoration: none;
 	font-size: 18px;
-	margin-left: 20px;
+	margin-left: 30px;
 	font-family: Antiqua;
 	color: #4c4c4c;
-	font-style: italic;
 	line-height: 50px;
 }
+
 .title:hover{
-text-decoration: none;
+	text-decoration: none;
 }
 
 .panel-body li i{
@@ -60,7 +69,7 @@ text-decoration: none;
 
 /* btngroup */
 .btn_group{
-	margin: 0px 0px 0px 50px;
+	margin: 0px;
 
 }
 /* input */
@@ -68,3 +77,89 @@ input.form-control{
 	background: #f8f8f8;
 }
 
+input{
+	text-align: center;
+}
+
+/* advance button */
+.advance{
+	height: 50px;
+}
+.advance > li{
+	height: 50px;
+	list-style-type: none;
+	border: 1px solid #e5e5e5;
+}
+.a{
+	height: 50px;
+	text-decoration: none;
+	font-size: 18px;
+	font-family: Antiqua;
+	color: #4c4c4c;	
+}
+
+a.dropdown-toggle::after {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 150px;
+    vertical-align: .255em;
+    content: "";
+    border-top: .3em solid;
+    border-right: .3em solid transparent;
+    border-bottom: 0;
+    border-left: .3em solid transparent;
+}
+
+.para{
+	margin-left: 20px;
+}
+
+.menu{
+	padding: 0px;
+}
+
+.item{
+	padding: 0px;
+	margin: 0px;
+	width: 325px;
+	height: 50px;
+	text-decoration: none;
+	font-size: 18px;
+	font-family: Antiqua;
+	color: #4c4c4c;	
+	line-height: 50px;
+	border: 1px solid #e5e5e5;
+	background: #f8f8f8;
+}
+.a:hover{
+	background: #cccccc;	
+}
+.item:hover{
+	background: #cccccc;
+	color:#005fbf;
+}
+
+legend{
+	font-size: 20px;
+	font-family: Anquila;
+}
+
+ul:before,
+ul:after{
+	content: '';
+	display: table;
+}
+ul:after{
+	clear: both;
+}
+
+.project{	
+	list-style: none;
+	padding: 0px;
+}
+
+.project > li{
+	text-align: left;
+	height: 30px;
+}

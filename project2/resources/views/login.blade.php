@@ -69,7 +69,7 @@
 							Username / Password?
 							<br>
 						</a>
-						<a>
+						<a class="text-danger">
 							<?php
 								if(session()->has('error')){
 									echo session('error');

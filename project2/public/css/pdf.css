@@ -1,0 +1,27 @@
+  	ul:before,
+	ul:after{
+		content: '';
+		display: table;
+	}
+	ul:after{
+		clear: both;
+	}
+
+	.project{	
+		list-style: none;
+		padding: 0px;
+	}
+
+	.project > li{
+		text-align: left;
+		height: 50px;
+	}
+
+	.bold > p{
+		font-weight: bold; 
+	}
+
+	.project > .bold{
+		text-align: left;
+		height: 30px;
+	}

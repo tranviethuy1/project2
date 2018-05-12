@@ -69,5 +69,13 @@ class Kernel extends HttpKernel
         'checkbeforeupdateadmin' => \App\Http\Middleware\Checkbeforeupdateadmin::class,
         'checkplanadd' => \App\Http\Middleware\Checkplanadd::class,
         'checkplanupdate' => \App\Http\Middleware\Checkplanupdate::class,
+        'checkassignment' => \App\Http\Middleware\Checkassignment::class,
+        'checkupdateproject' => \App\Http\Middleware\Checkupdateproject::class,
+        'checkaddnotice' => \App\Http\Middleware\Checkaddnotice::class,
+        'checkupdatenotice' => \App\Http\Middleware\Checkupdatenotice::class,
+        'checkrefuse' => \App\Http\Middleware\Checkrefuse::class,
+        'checkadminpayment' => \App\Http\Middleware\Checkadminpayment::class,
+        'checkaddtemplate' => \App\Http\Middleware\Checkaddtemplates::class,
+        'checkupdatetemplate' => \App\Http\Middleware\Checkupdatetemplates::class,
     ];
 }

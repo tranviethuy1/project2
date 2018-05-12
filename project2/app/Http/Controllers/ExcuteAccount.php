@@ -76,19 +76,13 @@ class ExcuteAccount extends Controller
         $address = $request->input('address');
         $birth = $request->input('birth');
         $phone = $request->input('phone');
-        $integerMale = null;
-        if($gender = "Male"){
-            $integerMale = 1;
-        }else{
-            $integerMale = 2;
-        } 
 
         $imforUpdate = \App\Imformations::find($id);
         $userUpdate = \App\User::find($id);
         
         $userUpdate->name = $name;
 
-        $imforUpdate->male = $integerMale;
+        $imforUpdate->male = $gender;
         $imforUpdate->birth = $birth;
         $imforUpdate->address = $address;
         $imforUpdate->phone = $phone;

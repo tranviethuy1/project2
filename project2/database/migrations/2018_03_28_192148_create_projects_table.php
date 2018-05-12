@@ -19,7 +19,7 @@ class CreateProjectsTable extends Migration
             $table->string('project_manager');
             $table->date('date_start');
             $table->longText('describe')->nullable();
-            $table->integer('status')->default(1);
+            $table->integer('status')->default(1); 
         });
     }
 

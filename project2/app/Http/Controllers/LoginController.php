@@ -40,11 +40,25 @@ class LoginController extends Controller
 
     public function logout(){
         Auth::logout();
+        session()->forget('data');
         return view('login');
     }
 
     public function redirectAdminPage(){
-        $projects = \App\Projects::where('status',1)->orWhere('status',2)->get();
-        return view('admin')->with('projects',$projects);
+        if(!session()->has('links')){
+            $projects = \App\Projects::where('status',1)->orWhere('status',2)->paginate(5);
+            return view('admin')->with('projects',$projects);
+        }else{
+            $links = session('links');
+            foreach ($links as $key => $link) {
+                $value =  new \App\Links();
+                $value->id_employee = $link['id_employee'];
+                $value->id_project = $link['id_project'];
+                $value->save();
+            }
+            session()->forget('links');
+            $projects = \App\Projects::where('status',1)->orWhere('status',2)->paginate(5);
+            return view('admin')->with(['projects'=>$projects,'alert'=>'Data is restored']);
+        }
     }
 }

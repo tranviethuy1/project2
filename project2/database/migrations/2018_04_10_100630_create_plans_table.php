@@ -24,7 +24,7 @@ class CreatePlansTable extends Migration
             $table->integer('benifit')->unsigned()->nullable();
             $table->integer('days')->unsigned();
             $table->integer('id_project')->unsigned();
-            $table->foreign('id_project')->references('id')->on('projects');
+            $table->foreign('id_project')->references('id')->on('projects'); 
         });
     }
 

@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Links extends Model
 {
-    protected $table ="links";
+    public $table ="links";
+        protected $fillable = [
+        'id_link', 'id_employee', 'id_project'
+    ];
     public $timestamps = false;
 }

@@ -24,15 +24,24 @@ class Checkadvance
         $postage = $request->postage;
         $postage_document = $request->postage_document;
         $others = $request->others;
-        $day = $request->day;
+
+        $plan = \App\Plans::where('id_project',$id_project)->first();
+
         
-        if($day == null){
-            return redirect()->Route('advanceview',array($id))->with('alert','Day is emty');
+        if(!isset($day)){
+            return redirect()->Route('advanceview',array($id))->with('days','Day is emty');
         }elseif( (isset($travel_cost) && !is_numeric($travel_cost)) || (isset($day) && !is_numeric($day))|| (isset($postage) && !is_numeric($postage)) || (isset($postage_document) && !is_numeric($postage_document))|| (isset($others) && !is_numeric($others))){
-            return redirect()->Route('advanceview',array($id))->with('alert','Unvalid number format');;
+            return redirect()->Route('advanceview',array($id))->with('alert','Unvalid number format');
         }elseif ($day<0 || $day >30) {
-            return redirect()->Route('advanceview',array($id))->with('alert','Day is more than 30 days');;           
-        }    
+            return redirect()->Route('advanceview',array($id))->with('days','Day is more than 30 days');           
+        } 
+
+        if(isset($plan)){
+            if($day != $plan->days){
+                return redirect()->Route('advanceview',array($id))->with('days','Day is diffirent from day in plan of project');  
+            }
+        }   
+
         return $next($request);
     }
 }

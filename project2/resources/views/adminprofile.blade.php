@@ -1,155 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>User profile </title>
-   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha256-3dkvEK0WLHRJ7/Csr0BZjAWxERc5WH7bdeUya2aXxdU= sha512-+L4yy6FRcDGbXJ9mPG8MT/3UCDzwR9gPeyFNMCtInsol++5m3bk2bXWKdZjvybmohrAsn3Ua5x8gfLnbE1YkOg==" crossorigin="anonymous">
-      <!-- Bootstrap Core CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- font family-->
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Catamaran:100" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Quicksand:300&amp;subset=vietnamese" rel="stylesheet">  
+  
+  <!-- font awesome -->
   <link rel="stylesheet" type="text/css" href="{{URL::asset('fonts/font-awesome-4.7.0/css/fontawesome-all.min.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:600" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Quicksand:300" rel="stylesheet">
+<!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <!-- Custom CSS -->
-    <style>
-    body {
-        padding-top: 70px;
-        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-    }
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 
-    .othertop{margin-top:10px;}
-
-    .avatar{
-      width: 160px;
-      height: 160px;
-    }
-
-    </style>
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-  <!-- Optional theme -->
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-  </head>
-
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <!-- jquery -->
+  <!-- my css and js -->
+  <link rel="stylesheet" type="text/css" href="{!! asset('css/profile.css')!!}">
+  <script src="{!! asset('js/owl.carousel.min.js')!!}"></script>   
+</head>
 <body>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-10 ">
-        <form class="form-horizontal">
-        <fieldset>
-
-        <!-- Form Name -->
-        <legend style ="text-align: center;">User profile</legend>
-
-        <!-- Text input-->
-          <div class="form-group">
-            <label class="col-md-4 control-label" for="Name (Full name)">Name</label>  
-            <div class="col-md-4">
-              <div class="input-group">
-                <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                <input id="Name" name="name" type="text" value="<?php echo $values['user']['name'] ;?>" class="form-control input-md" disabled>
+  <?php 
+    $id = session('data')['id']; 
+    $name = session('data')['name'];
+  ?>
+  <div class="profile">
+    <div class="container">
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-5 col--5--left">
+          <div class="big--avatar">
+            <div class=" thoi thoi1">
+              <div class=" thoi thoi2">
+                <div class=" thoi thoi3">
+                  <div class=" thoi thoi4">
+                    @if(isset($values['imformation']['avatar']))
+                    <img src="{!! asset($values['imformation']['avatar']) !!}" alt="" class="img-fluid"/>
+                    @else
+                    <img src="{!! asset('http://websamplenow.com/30/userprofile/images/avatar.jpg') !!}" alt="" class="img-fluid"/>
+                    @endif
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+          <div class="big--name">
+            <h3>
+              @if(isset($values['user']['name']))
+                {{$values['user']['name']}}
+              @endif
+            </h3>
+          </div>
+          <div class="big-back-to-home">
+            <a href="{{Route('admin')}}" class="btn btn-primary"> 
+              <i class="fas fa-home"></i>
+            </a>
 
-        <!-- Text input-->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="Date Of Birth">Date Of Birth</label>  
-          <div class="col-md-4">
-            <div class="input-group">
-               <div class="input-group-addon"><i class="fa fa-birthday-cake"></i></div>
-               <input id="Date Of Birth" name="Date Of Birth" type="text" value ="<?php echo $values['imformation']['birth'] ;?>" class="form-control input-md" disabled>
+            <a href="{{Route('updateadmin',array($id))}}" class="btn btn-primary update"> 
+              <i class="fas fa-pen-square"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-5 col--5-right">
+          <div class="profile--content">
+            <div class="profile--avatar">
+              @if(isset($values['imformation']['avatar']))
+                <img src="{!! asset($values['imformation']['avatar']) !!}" alt="" class="img-fluid"/>
+              @else
+                <img src="{!! asset('http://websamplenow.com/30/userprofile/images/avatar.jpg') !!}" alt="" class="img-fluid"/>
+              @endif
+            </div>
+            <div class="profile--name">
+              @if(isset($values['user']['name']))
+                {{$values['user']['name']}}
+              @endif
+            </div>
+
+            <div class="profile--contact">
+              <div class="profile--phone">
+                <p class="profile--title">
+                  <i class="fas fa-phone"></i> Mobile
+                </p>
+                <p class="profile--data">
+                  {{$values['imformation']['phone']}}
+                </p>
+              </div>
+              <div class="profile--mail">
+                <p class="profile--title">
+                  <i class="fas fa-envelope"></i> Email
+                </p>
+                <p class="profile--data">
+                  {{$values['user']['email']}}
+                </p>
+                
+              </div>
+            </div>
+
+            <div class="profile--infor">
+              <div class="profile--address">
+                <p class="profile--title">
+                  <i class="fas fa-address-card"></i> Address
+                </p>
+                <p class="profile--data">
+                  {{$values['imformation']['address']}}
+                </p>
+              </div>
+              <div class="profile--gender">
+                <p class="profile--title">
+                  <i class="fas fa-transgender"></i> Gender
+                </p>
+                <p class="profile--data">
+                  @if(isset($values['imformation']['male']))
+                    @if($values['imformation']['male'] == 1)
+                      Male
+                    @else
+                      Female
+                    @endif
+                  @endif
+                </p>
+              </div>
+              <div class="birthday">
+                <p class="profile--title">
+                  <i class="fas fa-birthday-cake"></i> Birthday
+                </p>
+                <p class="profile--data">
+                  @if(isset($values['imformation']['birth']))
+                    {{$values['imformation']['birth']}}
+                  @endif
+                </p>
+              </div>
             </div>
           </div>
         </div>
-
-        <!-- Text input-->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="email">Email</label>  
-          <div class="col-md-4">
-            <div class="input-group">
-                <div class="input-group-addon"><i class="fa fa-envelope fa" style="font-size: 20px;"></i></div>
-                <input id="email" name="email" type="text" value="<?php echo $values['user']['email'] ;?>" class="form-control input-md" disabled>
-            </div>
-          </div>
-        </div>
-
-        <!-- Text input-->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="password">Password</label>  
-          <div class="col-md-4">
-            <div class="input-group">
-              <div class="input-group-addon"><i class="fa fa-lock fa-lg" style="font-size: 20px;"></i></div>
-              <input id="password" name="password" type="text" value ="<?php echo $values['user']['password'] ;?>" class="form-control input-md" disabled>
-            </div>
-          </div>
-        </div>
-
-        <!-- Multiple Radios (inline) -->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="Gender">Gender</label>
-          <div class="col-md-4"> 
-            <div class="input-group">
-              <div class="input-group-addon"><i class="fa fa-male" style="font-size: 20px;"></i></div>
-              <input id="password" name="gender" type="text" value="<?php if($values['imformation']['male'] == 1){echo "Male";}else{echo "FeMale";} ;?>" class="form-control input-md" disabled>
-            </div>
-          </div>
-        </div>
-
-        <!-- Text input-->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="Phone number ">Phone number </label>  
-          <div class="col-md-4">
-            <div class="input-group">
-              <div class="input-group-addon"><i class="fa fa-phone"></i></div>
-              <input id="Phone number " name="phone" type="text" value="<?php echo $values['imformation']['phone'] ;?>" class="form-control input-md" disabled>
-            </div>
-          </div>
-        </div>
-
-        <!-- Text input-->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="Address"> Address</label>  
-          <div class="col-md-4">
-            <div class="input-group">
-              <div class="input-group-addon"><i class="fa fa-address-book"></i></div>
-              <input id="Email Address" name="Email Address" type="text" value="<?php echo $values['imformation']['address'] ;?>" class="form-control input-md" disabled>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="col-md-4 control-label" ></label>  
-          <div class="col-md-4">
-            <a href="{{Route('admin')}}" class="btn btn-success">Back to Home <i class="fas fa-chevron-right"></i></a>
-          </div>
-        </div>
-
-      </fieldset>
-    </form>
-      </div>
-
-      <div class="col-md-2 hidden-xs">
-        @if(isset($values['imformation']['avatar']))
-          <img src = "{!! asset($values['imformation']['avatar']) !!}" class="avatar">
-        @else
-          <img src='http://websamplenow.com/30/userprofile/images/avatar.jpg' class='img-responsive img-thumbnail'>
-        @endif
+        <div class="col-1"></div>
       </div>
     </div>
   </div>
+    
+<!-- script carousel -->
+    <script>
+            $(document).ready(function() {
+              $('.list').owlCarousel({
+                loop: true,
+                responsiveClass: true,
+                responsive: {
+                  0: {
+                    items: 1,
+                    
+                  },
+                  600: {
+                    items: 2,
+                    margin: 60,
+                    
+                  },
+                  960:{
+                  items:3
+              },
+                  1000: {
+                    items: 5,
+                    loop: true,
+                  }
+                }
+              })
+            })
+        </script>
+
+        <script>
+            var owl = $('.gallery--list');
+      owl.owlCarousel({
+          loop:true,
+          nav:false,
+          margin:5,
+          autoplay:true,
+          autoplayTimeout:3000,
+          autoplayHoverPause:true,
+          responsive:{
+              0:{
+                  items:1
+              },
+              600:{
+                  items:2
+              },            
+              960:{
+                  items:3
+              },
+              1200:{
+                  items:4
+              }
+          }
+      });
+      owl.on('mousewheel', '.owl-stage', function (e) {
+          if (e.deltaY>0) {
+              owl.trigger('next.owl');
+          } else {
+              owl.trigger('prev.owl');
+          }
+          e.preventDefault();
+      });
+        </script>
 
 </body>
-
 </html>

@@ -5,18 +5,24 @@
 			margin: auto;
 		}	
 	</style>
+
+	<legend class ="text-info" style ="text-align: left;">Show all your advance</legend>
 	<form action="{{Route('findadvance',array($id))}}" method="get" accept-charset="utf-8">
-		<div class="row">
-			<div class="col-md-8 text_search" >
-				{!! csrf_field() !!}
-				<input type="text" id="search" class="inputfind" placeholder="Name Project" name="name_project"><i class ="fas fa-search"></i>
-				<button type="submit" class="btn btn-success buttonfind" name="submit">Find</button>
+		<div class="form-group">
+			<div class="row">
+				<div class="col-md-5" >
+					{!! csrf_field() !!}
+					<input type="text" id="search" class="form-control inputfind" placeholder="Name Project" name="name_project">
+				</div>
+				<div class="col-md-4">
+					<i class ="fas fa-search"></i><button type="submit" class="btn btn-success buttonfind" name="submit">Find</button>
+				</div>
 			</div>
 		</div>
 		<!-- search live -->
 		<script type="text/javascript">
 		$(document).ready(function(){	
-			$('.text_search #search').on('keyup',function(){
+			$('#search').on('keyup',function(){
 				$value = $(this).val();
 				$.ajax({
 					type: 'get',
@@ -30,8 +36,8 @@
 		});
 		</script>
 
-		<div class="row" style="margin-top: 20px;margin-left: 20px; ">
-			<table class="table table-bordered table-hover">
+		<div class="row" style="margin-top: 20px;margin-left: 10px; ">
+			<table class="table table-bordered table-striped">
 			    <thead>
 			      <tr>
 			        <th>Project</th>
@@ -41,42 +47,44 @@
 			        <th>Postage</th>
 			        <th>Postage_Document</th>
 			        <th>Others</th>
+			        <th>Total</th>
 			      </tr>
 			    </thead>
 			    <tbody>
-		 @if(isset($advances_find))	
+		 	@if(isset($advances_find))	
 			    @foreach($advances_find as $advance_find)
 			      	<tr>
-			        <td><?php $id_project = $advance_find['id_project']; $project = \App\Projects::where('id',$id_project)->first()->toArray(); echo $project['name_project']; ?></td>
-			        <td> <?php if(isset($advance_find['advance_date'])){ echo $advance_find['advance_date'];} ?></td>
-			        <td> <?php if(isset($advance_find['travel_cost'])){ echo number_format($advance_find['travel_cost']).'VNĐ';} ?></td>
-			        <td> <?php if(isset($advance_find['rent_house'])){ echo number_format($advance_find['rent_house']).'VNĐ' ;} ?></td>
-			        <td> <?php if(isset($advance_find['postage'])){ echo number_format($advance_find['postage']).'VNĐ' ;} ?></td>
-			        <td> <?php if(isset($advance_find['postage_document'])){ echo number_format($advance_find['postage_document']).'VNĐ' ;} ?></td>
-			        <td> <?php if(isset($advance_find['others'])){ echo number_format($advance_find['others']).'VNĐ';} ?></td>
+				        <td><?php $id_project = $advance_find['id_project']; $project = \App\Projects::where('id',$id_project)->first()->toArray(); echo $project['name_project']; ?></td>
+				        <td> <?php if(isset($advance_find['advance_date'])){ echo $advance_find['advance_date'];} ?></td>
+				        <td> <?php if(isset($advance_find['travel_cost'])){ echo number_format($advance_find['travel_cost']);} ?></td>
+				        <td> <?php if(isset($advance_find['rent_house'])){ echo number_format($advance_find['rent_house']) ;} ?></td>
+				        <td> <?php if(isset($advance_find['postage'])){ echo number_format($advance_find['postage']) ;} ?></td>
+				        <td> <?php if(isset($advance_find['postage_document'])){ echo number_format($advance_find['postage_document']);} ?></td>
+				        <td> <?php if(isset($advance_find['others'])){ echo number_format($advance_find['others']);} ?></td>
+				        <td> <?php if(isset($advance_find)){ echo number_format($advance_find['travel_cost']+$advance_find['rent_house']+$advance_find['postage']+$advance_find['postage_document']+$advance_find['others']+$advance_find['others']).'VNĐ';} ?></td>
 			      	</tr>
-			    @endforeach
-			    </tbody>
-				</table>
-		</div>
-		@endif
+			   	@endforeach
+			@endif
 
-		@if(isset($advances))	
-			@foreach($advances as $advance)
+			@if(isset($advances))	
+				@foreach($advances as $advance)
 			    <tr>
 			        <td><?php $project = \App\Projects::where('id',$advance->id_project)->first()->toArray(); echo $project['name_project']; ?></td>
 			        <td> <?php if(isset($advance->advance_date)){ echo $advance->advance_date;} ?></td>
-			        <td> <?php if(isset($advance->travel_cost)){ echo number_format($advance->travel_cost).'VNĐ';} ?></td>
-			        <td> <?php if(isset($advance->rent_house)){ echo number_format($advance->rent_house).'VNĐ' ;} ?></td>
-			        <td> <?php if(isset($advance->postage)){ echo number_format($advance->postage).'VNĐ' ;} ?></td>
-			        <td> <?php if(isset($advance->postage_document)){ echo number_format($advance->postage_document).'VNĐ' ;} ?></td>
-			        <td> <?php if(isset($advance->others)){ echo number_format($advance->others).'VNĐ';} ?></td>
+			        <td> <?php if(isset($advance->travel_cost)){ echo number_format($advance->travel_cost);} ?></td>
+			        <td> <?php if(isset($advance->rent_house)){ echo number_format($advance->rent_house);} ?></td>
+			        <td> <?php if(isset($advance->postage)){ echo number_format($advance->postage) ;} ?></td>
+			        <td> <?php if(isset($advance->postage_document)){ echo number_format($advance->postage_document) ;} ?></td>
+			        <td> <?php if(isset($advance->others)){ echo number_format($advance->others);} ?></td>
+			        <td> <?php if(isset($advance)){ echo number_format($advance->travel_cost+$advance->rent_house+$advance->postage+$advance->postage_document+$advance->others).'VNĐ';} ?></td>
 			    </tr>
 			    @endforeach
-			    </tbody>
-				</table>
+			@endif
+			</tbody>
+		</table>
 		</div>
 
+		@if(isset($advances))	
 		<div class= "row">
 			<ul class="pagination center">
 				@if($advances->currentPage() != 1)

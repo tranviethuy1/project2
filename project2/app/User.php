@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','posision',
+        'id','name', 'email', 'password','posision'
     ];
 
     /**
@@ -27,6 +27,8 @@ class User extends Authenticatable
         'remember_token',
     ];
     
+    public $table = "users";
+
     public $timestamps = false;
 
     public function link_user2project(){
