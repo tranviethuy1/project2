@@ -112,7 +112,7 @@
 							<input type="text" class="form-control" placeholder="Money for travelling" name="travel_cost" >
 						</div>
 						<div class="col-md-7">
-							<span class="text-info">(**Bao gồm tiền đi trong toàn bộ chuyến công tác**) </span>
+							<span class="text-info">(**Bao gồm tiền đi lại trong toàn bộ chuyến công tác**) </span>
 						</div>
 					</div>	
 				</div>
@@ -152,7 +152,7 @@
 						</div>
 					</div>
 				</div>
-				
+
 				<div class="form-group">
 					<div class="row">
 	          			<label class="col-md-2 control-label" ></label>  
@@ -163,6 +163,23 @@
 			         	</div>
 			         </div>
         		</div>
+
+				<div class="form-group">
+					<ul class="list-group">
+						<p>Rent house(Tiền thuê nhà của chuyến công tác)</p>
+						<li class="list-group-item"><p class="text-info"> Hóa đơn, chứng từ thuê phòng nghỉ hợp pháp theo quy định của pháp luật (áp dụng khi thanh toán tiền thuê phòng nghỉ theo hóa đơn thực tế).</p></li>
+						<p>Travel-cost(Tiền đi lại trong toàn bộ chuyến công tác)</p>
+					  	<li class="list-group-item"> <p class="text-info">Hóa đơn, chứng từ mua vé hợp pháp theo quy định của pháp luật khi đi công tác bằng các phương tiện giao thông hoặc giấy biên nhận của chủ phương tiện.</p></li>
+					  	<li class="list-group-item"> <p class="text-info">Riêng chứng từ thanh toán vé máy bay ngoài cuống vé (hoặc vé điện tử) phải kèm theo thẻ lên máy bay theo quy định của pháp luật. Trường hợp mất thẻ lên máy bay thì phải có xác nhận của cơ quan, đơn vị cử đi công tác (áp dụng khi thanh toán chi phí đi lại theo thực tế)</p></li>
+					  	<li class="list-group-item"><p class="text-info">Giấy đi đường của người đi công tác có đóng dấu xác nhận của cơ quan, đơn vị nơi đến công tác (hoặc của khách sạn, nhà khách nơi lưu trú).</p></li>
+					  	<p>Postage(Cước, phí di chuyển cho bản thân và phương tiện)</p>
+					  	<li class="list-group-item"><p class="text-info">Hóa đơn thanh toán cước, phí di chuyển cho bản thân và phương tiện.</p></li>
+					  	<p>Documment(Cước tài liệu, thiết bị, dụng cụ, đạo cụ của chuyến công tác)</p>
+					  	<li class="list-group-item"><p class="text-info">Hóa đơn mua các tài liệu trong chuyến công tác có chữ ký của cơ sở bán hoặc đơn vị bán trong trường hợp cơ sở không viết hóa đơn đề nghị cán bộ có giấy xác thực của cơ sở bán kèm chữ ký.</p></li>
+					  	<p>Others(Cước hành lý của người đi công tác)</p>
+					  	<li class="list-group-item"><p class="text-info">Hóa đơn thanh toán cước phí hành lý kèm chữ ký của nơi vận chuyển.</p></li>
+					</ul> 
+				</div>
 
 			</form>
 		</div>

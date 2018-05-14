@@ -4,6 +4,10 @@
 	<div class="row">
 		<div class ="col-md-5"><legend class ="text-info" >Add plan for project</legend></div>
 	</div>
+
+	<div class="row">
+		<label class="control-label col-md-5 text-danger" for="pn">Quản lý dự án tính toán chi phí một cách hợp lý nhất</label>
+	</div>
 	
 	<div class="row">
 		<div class="col-md-12">	
@@ -139,6 +143,30 @@
 				    		<a href="{{Route('admin')}}" class="btn btn-primary"> Back to Home</a>
 				    	</div>
 				    </div>								
+				</div>
+
+				<div class="form-group">
+					<ul class="list-group">
+						<p>Bộ trưởng</p>
+					  	<li class="list-group-item"> <p class="text-info">Mức giá thuê phòng ngủ: 2.500.000 đồng/ngày/phòng theo tiêu chuẩn một người/1 phòng, không phân biệt nơi đến công tác.</p></li>
+					  	<p>Thứ trưởng</p>
+					  	<li class="list-group-item"><p class="text-info">Vùng I:Mức giá thuê phòng ngủ:1.200.000 đồng/ngày/phòng theo tiêu chuẩn một người/1 phòng.</p></li>
+					  	<li class="list-group-item"><p class="text-info">Vùng còn lại:Mức giá thuê phòng ngủ:1.100.000 đồng/ngày/phòng theo tiêu chuẩn một người/1 phòng.</p></li>
+					  	<p>Đối tượng còn lại</p>
+					  	<li class="list-group-item"><p class="text-info">Vùng I: Các đối tượng còn lại: Được thanh toán mức giá thuê phòng ngủ là 1.000.000 đồng/ngày/phòng.</p></li>
+					  	<li class="list-group-item"><p class="text-info">Vùng còn lại: Các đối tượng còn lại: Được thanh toán mức giá thuê phòng ngủ là 700.000 đồng/ngày/phòng.</p></li>
+					</ul> 
+				</div>
+
+				<div class="form-group">
+					<ul class="list-group">
+						<p>Phụ cấp lưu trú(Benifit)</p>
+					  	<li class="list-group-item"> <p class="text-info">Mức phụ cấp lưu trú để trả cho người đi công tác: 200.000 đồng/ngày.</p></li>
+					  	<li class="list-group-item"><p class="text-info"> Cán bộ, công chức, viên chức và người lao động ở đất liền được cử đi công tác làm nhiệm vụ trên biển, đảo thì được hưởng mức phụ cấp lưu trú: 250.000 đồng/người/ngày thực tế đi biển, đảo (áp dụng cho cả những ngày làm việc trên biển, đảo, những ngày đi, về trên biển, đảo).</p></li>
+					  	<p>Tiền thêm giờ (overtime)</p>
+					  	<li class="list-group-item"> <p class="text-info">Tiền đi công tác vào những ngày nghỉ(thứ bảy và chủ nhật).</p></li>
+					  	<li class="list-group-item"><p class="text-info">Mức phí thêm giờ cho chuyến công tác vào những ngày cuối tuần 200.000/người/1ngày .</p></li>
+					</ul> 
 				</div>
 		    </form>
 		</div> 

@@ -28,7 +28,7 @@ class LoginController extends Controller
     	if(Auth::attempt(array('email'=>$email,'password'=>$password))){
     		session()->put('data',['id' => $id,'name' => $name]);
     		if($posision == 1){
-    			return redirect('employeepage')->with('values', ['id'=>$id,'name'=>$name]);
+    			return redirect()->Route('loadnotices')->with('values', ['id'=>$id,'name'=>$name]);
     		}else{
     			return redirect('admin')->with('values', ['id'=>$id,'name'=>$name]);		
             }

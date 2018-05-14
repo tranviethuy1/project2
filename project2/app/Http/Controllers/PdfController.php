@@ -28,4 +28,30 @@ class PdfController extends Controller
 	    return $pdf->stream();
 	}
 
+	public function downloadAdvance(Request $request){
+		$id_advance = $request->id_advance;
+		$advance = DB::table('advances')->where('id',$id_advance)->first();
+		$project = DB::table('projects')->where('id',$advance->id_project)->first();
+		$name = DB::table('users')->where('id',$advance->id_employee)->value('name');
+
+		$pdf = PDF::loadView('formprintadvance',['project'=>$project,'advance'=>$advance,'name'=>$name]);
+
+		$name_download = $project->name_project.$advance->advance_date."."."pdf";
+
+		return $pdf->stream();
+	}
+
+	public function downloadResult(Request $request){
+		$id_result = $request->id_result;
+		$result = DB::table('results')->where('id',$id_result)->first();
+		$project = DB::table('projects')->where('id',$result->id_project)->first();
+		$name = DB::table('users')->where('id',$result->id_employee_r)->value('name');
+
+		$pdf = PDF::loadView('formprintresult',['project'=>$project,'result'=>$result,'name'=>$name]);
+
+		$name_download = $project->name_project.$result->date_finish."."."pdf";
+
+		return $pdf->stream();
+	}
+
 }

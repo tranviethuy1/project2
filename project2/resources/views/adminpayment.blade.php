@@ -97,7 +97,8 @@
 				<th>Postage</th>
 				<th>Document</th>
 				<th>Others</th>	
-				<th>Total</th>	
+				<th>Total</th>
+				<th></th>	
 		      </tr>
 		    </thead>
 		    <tbody>
@@ -114,6 +115,7 @@
 			        <td>{{number_format($advance->postage_document)}}</td>
 			        <td>{{number_format($advance->others)}}</td>
 			        <td>{{number_format($all).'VNĐ'}}</td>
+			        <td><a href="{{Route('printadvance',array($advance->id))}}" onclick="return Mesenger('Do you want to print advance ?')" id="print" class="btn btn-info">Print <i class="fas fa-print"></i></a></td>
 			      </tr>
 			    @endforeach
 			@endif      
@@ -321,7 +323,8 @@
 			        <td>{{number_format($result->overtime)}}</td>
 			        <td>{{number_format($result->benifit)}}</td>
 			        <td>
-			        	<a href="{{Route('deletepayment',array($project->id,$result->id))}}" onclick="return DeleteMesenger('Do you want to delete this payment?')" class="btn btn-info">Delete <i class="fas fa-trash-alt" style="width: 30px;"></i></a>
+			        	<a href="{{Route('deletepayment',array($project->id,$result->id))}}" onclick="return Mesenger('Do you want to delete this payment?')" class="btn btn-info" style="width:100px;">Delete <i class="fas fa-trash-alt"></i></a>
+				        <a href="{{Route('printresult',array($result->id))}}" onclick="return Mesenger('Do you want to print result ?')" id="print" class="btn btn-secondary" style="width:100px; margin-top: 10px;">Print <i class="fas fa-print"></i></a>
 			        </td>
 			      </tr>
 			    @endforeach
@@ -333,20 +336,13 @@
 	<div class="row">
 		<div class ="col-md-7"></div>
 		<div class ="col-md-5">
-			<a href="{{Route('finishproject',array($project->id))}}" onclick="return FinishProjectMesenger('Do you want to finish project?')" class="btn btn-success" style="width: 150px;">Finish Project <i class="fas fa-thumbs-up"></i></a>
+			<a href="{{Route('finishproject',array($project->id))}}" onclick="return Mesenger('Do you want to finish project?')" class="btn btn-success" style="width: 150px;">Finish Project <i class="fas fa-thumbs-up"></i></a>
             <a href="{{Route('admin')}}" class="btn btn-danger" ><span class="glyphicon glyphicon-remove-sign"></span>Back to Home <i class="fas fa-arrow-alt-circle-left"></i></a>
 		</div>
 	</div>
 
 	<script type="text/javascript">
-		function DeleteMesenger(msg){
-			if(window.confirm(msg)){
-				return true;
-			}
-			return false;
-		};
-
-		function FinishProjectMesenger(msg){
+		function Mesenger(msg){
 			if(window.confirm(msg)){
 				return true;
 			}

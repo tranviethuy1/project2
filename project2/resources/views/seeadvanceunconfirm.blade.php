@@ -218,6 +218,7 @@
 				<th>Postage</th>
 				<th>Document</th>
 				<th>Others</th>	
+				<th></th>	
 		      </tr>
 		    </thead>
 		    <tbody>
@@ -233,6 +234,7 @@
 			        <td>{{number_format($advance->postage)}}</td>
 			        <td>{{number_format($advance->postage_document)}}</td>
 			        <td>{{number_format($advance->others)}}</td>
+			        <td><a href="{{Route('printadvance',array($advance->id))}}" onclick="return AcceptMesenger('Do you want to print advance ?')" id="print" class="btn btn-info">Print <i class="fas fa-print"></i></a></td>
 			      </tr>
 			    @endforeach
 			@endif      

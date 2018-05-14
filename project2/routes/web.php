@@ -185,4 +185,8 @@ Route::get('listtemplate','TemplateController@showListTemplate')->name('listtemp
 
 Route::get('printpayment/{id_project}','PdfController@downloadpdf')->name('printpayment');
 
+Route::get('printadvance/{id_advance}','PdfController@downloadAdvance')->name('printadvance');
+
+Route::get('printresult/{id_result}','PdfController@downloadResult')->name('printresult');
+
 
