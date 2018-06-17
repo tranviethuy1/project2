@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use \App\Results;
+use App\Charts\MyChart;
+use App\Projects;
 class AdminController extends Controller
 {
   	public function addProject( Request $request){
@@ -23,7 +25,7 @@ class AdminController extends Controller
 
         $project->save();
 
-        return redirect('admin')->with('alert','Add Project Successful');
+        return redirect('admin')->with('alert','Thêm chuyến công tác thành công !!');
   	}
 
   	public function getDataAdmin(Request $request){
@@ -57,7 +59,7 @@ class AdminController extends Controller
         }else{
             $integerMale = 2;
         } 
-
+ 
         $imforUpdate = \App\Imformations::find($id);
         $userUpdate = \App\User::find($id);
         
@@ -69,26 +71,32 @@ class AdminController extends Controller
         $imforUpdate->phone = $phone;
 
         if($request->hasFile('avatar')){
+            $imformation = \App\Imformations::where('id',$id)->first();
+            if($imformation->avatar != null){
+                unlink($imformation->avatar);
+            }
+            
             $file = $request->file('avatar');
             if(in_array($file->getClientOriginalExtension(),['png','jpg','jpeg'])){
-                $photo_name = $file->getClientOriginalName();
+                $photo_name = mt_rand();
+                $type = $file->getClientOriginalExtension();
                 $link = "images/avatars/";
-                $file->move($link,$photo_name);
-                $imforUpdate->avatar = $link.$photo_name;
+                $file->move($link,$photo_name.".".$type);
+                $imforUpdate->avatar = $link.$photo_name.".".$type;
                 
                 $userUpdate->save();
                 $imforUpdate->save();
-                return Redirect('admin')->with('alert','Update succesful');
+                return Redirect('admin')->with('alert','Cập nhật thông tin thành công !!');
             }else{
-                $error = "Invalid format file or Size of file is too big";
+                $error = "Không đúng định dạng file hoặc kích cỡ file quá lớn !!";
                 return redirect()->Route('back2updateadmin',array($id,$error));
             }
         }else{
             $userUpdate->save();
             $imforUpdate->save();
-            return redirect('admin')->with('alert','Update succesful');
+            return redirect('admin')->with('alert','Cập nhật thông tin thành công !!');
         }
-    }
+    } 
 
     public function showError(Request $request){
         $id = $request->id;
@@ -113,7 +121,7 @@ class AdminController extends Controller
         $userUpdate->password = bcrypt($newpass);
         $userUpdate->save();
 
-        return redirect('admin')->with('alert','Change password succesful');
+        return redirect('admin')->with('alert','Đổi mật khẩu thành công !!');
     }
 
     public function redirectPlan(Request $request){
@@ -164,7 +172,7 @@ class AdminController extends Controller
             $value->id_project = $id_project;
             $value->save();
 
-            return redirect('admin')->with('alert','Added plan for the project');
+            return redirect('admin')->with('alert','Thêm các khoản ước tính của chuyến công tác thành công !!');
         }else{
 
             $plan->travel_cost = $travel_cost;
@@ -176,7 +184,7 @@ class AdminController extends Controller
             $plan->benifit = $benifit;
             $plan->days = $days;
             $plan->save();
-            return redirect('admin')->with('alert','Updated plan for the project');
+            return redirect('admin')->with('alert','Cập nhật các khoản ước tính của chuyến công tác thành công !!');
         }
     }
 
@@ -210,9 +218,9 @@ class AdminController extends Controller
                 ]);
                 if(session()->has('links')){
                     session()->forget('links');
-                    return redirect('admin')->with('alert','Updated assignment for the project');
+                    return redirect('admin')->with('alert','Cập nhật cán bộ cho chuyến công tác này !!');
                 }else{
-                    return redirect('admin')->with('alert','Added assignment for the project');
+                    return redirect('admin')->with('alert','Đã phân công cán bộ cho chuyến công tác này !!');
                 }
 
             case 2:
@@ -227,9 +235,9 @@ class AdminController extends Controller
 
                 if(session()->has('links')){
                     session()->forget('links');
-                    return redirect('admin')->with('alert','Updated assignment for the project');
+                    return redirect('admin')->with('alert','Cập nhật cán bộ cho chuyến công tác này !!');
                 }else{
-                    return redirect('admin')->with('alert','Added assignment for the project');
+                    return redirect('admin')->with('alert','Đã phân công cán bộ cho chuyến công tác này !!');
                 }
 
             case 3:
@@ -247,9 +255,9 @@ class AdminController extends Controller
 
                 if(session()->has('links')){
                     session()->forget('links');
-                    return redirect('admin')->with('alert','Updated assignment for the project');
+                    return redirect('admin')->with('alert','Cập nhật cán bộ cho chuyến công tác này !!');
                 }else{
-                    return redirect('admin')->with('alert','Added assignment for the project');
+                    return redirect('admin')->with('alert','Đã phân công cán bộ cho chuyến công tác này !!');
                 }  
 
             case 4:
@@ -270,9 +278,9 @@ class AdminController extends Controller
 
                 if(session()->has('links')){
                     session()->forget('links');
-                    return redirect('admin')->with('alert','Updated assignment for the project');
+                    return redirect('admin')->with('alert','Cập nhật cán bộ cho chuyến công tác này !!');
                 }else{
-                    return redirect('admin')->with('alert','Added assignment for the project');
+                    return redirect('admin')->with('alert','Đã phân công cán bộ cho chuyến công tác này !!');
                 }
 
             default:
@@ -296,9 +304,9 @@ class AdminController extends Controller
 
                 if(session()->has('links')){
                     session()->forget('links');
-                    return redirect('admin')->with('alert','Updated assignment for the project');
+                    return redirect('admin')->with('alert','Cập nhật cán bộ cho chuyến công tác này !!');
                 }else{
-                    return redirect('admin')->with('alert','Added assignment for the project');
+                    return redirect('admin')->with('alert','Đã phân công cán bộ cho chuyến công tác này !!');
                 }
 
             }
@@ -310,7 +318,7 @@ class AdminController extends Controller
         $links = \App\Projects::find($id_project)->link_project2link->toArray();
         session()->put('links',$links);
         DB::table('links')->where('id_project',$id_project)->delete();
-        return redirect()->Route('assignment',array($id,$id_project))->with('alert','You can update assignment or cancel assignment');
+        return redirect()->Route('assignment',array($id,$id_project))->with('alert','Bạn có thể phân công laih cán bộ cho chuyến công tác hoặc hủy thao tác này !!');
     }    
 
     public function redirectUpdateProject(Request $request){
@@ -335,7 +343,7 @@ class AdminController extends Controller
         $project->describe = $describe;
 
         $project->save();
-        return redirect()->Route('admin')->with('alert','Update Project Succesful');
+        return redirect()->Route('admin')->with('alert','Cập nhật chuyến công tác thành công !!');
     }
 
     public function redirectAdminUnconfirmAdvance(){
@@ -347,9 +355,6 @@ class AdminController extends Controller
         $id_project = $request->id_project;
         $project = \App\Projects::where('id',$id_project)->first();
         $plan = \App\Plans::where('id_project',$id_project)->first();
-        $advances = \App\Advances::where('id_project',$id_project)->get();
-        $admin = null;
-        $data_messages = array();
 
         $name_employee = array();
 
@@ -360,21 +365,26 @@ class AdminController extends Controller
             $user = \App\User::where('id',$id_employee)->first();
             $name_employee[] = $user->name;
         }
-        //get mesage
-        foreach($advances as $advance){
-            $user = DB::table('users')->where('id',$advance->id_employee)->first();
-            $message = DB::table('refuses')->where('id_advance',$advance->id)->get();
-            if($message != null){
-                foreach ($message as $key => $value) {
-                    $admin = DB::table('users')->where('id',$value->id_admin)->first();
-                }
-                $data_messages[] = ['message'=>$message,'employee'=>$user->name,'admin'=>$admin->name];
-            }
-        }
 
+        $advances = \App\Advances::where('id_project',$id_project)->get();
         if(empty($advances)){
             return view('seeadvanceunconfirm')->with(['plan'=>$plan,'project'=>$project,'name_employee'=>$name_employee]);
         }else{
+            $admin = null;
+            $data_messages = array();
+
+            //get mesage
+            foreach($advances as $advance){
+                $message = DB::table('refuses')->where('id_advance',$advance->id)->get();
+                if(count($message) != 0){
+                    $user_mes = DB::table('users')->where('id',$advance->id_employee)->first();
+                    foreach ($message as $value) {
+                        $admin = DB::table('users')->where('id',$value->id_admin)->first();
+                    }
+                    $data_messages[] = ['message'=>$message,'employee'=>$user_mes->name,'admin'=>$admin->name];
+                }
+            }
+
             return view('seeadvanceunconfirm')->with(['plan'=>$plan,'project'=>$project,'advances'=>$advances,'name_employee'=>$name_employee, 'data_messages'=>$data_messages]);
         }  
     }
@@ -384,14 +394,14 @@ class AdminController extends Controller
         $advances = DB::table('advances')->where('id_project',$id_project)->first();
 
         if(empty($advances)){
-            return redirect()->Route('seeadvance',array($id_project))->with('alert','Cant accept because No advance in this project');
+            return redirect()->Route('seeadvance',array($id_project))->with('alert','Không thể duyệt phiếu tạm ứng vì không có phiếu vay tạm ứng nào trong chuyến công tác này !!');
         }else{
             $project = \App\Projects::where('id',$id_project)->first();
             $project->status = 2;
             $project->save();
 
             $projects = \App\Projects::where('status',1)->paginate(5);
-            return view('adminunconfirmadvance')->with(['projects'=>$projects,'alert'=>"Accepted Advances"]);            
+            return view('adminunconfirmadvance')->with(['projects'=>$projects,'alert'=>"Đã duyệt phiếu tạm ứng !!"]);            
         } 
     }
 
@@ -488,7 +498,7 @@ class AdminController extends Controller
                 break;  
 
             }  
-        return redirect()->Route('seeadvance',array($id_project))->with('alert','Message is sent to employee');
+        return redirect()->Route('seeadvance',array($id_project))->with('alert','Thông điệp đã được gửi đến cán bộ !!');
 
     }
 
@@ -497,7 +507,7 @@ class AdminController extends Controller
         $id_refuse = $request->id_refuse;
         $content_refuse = $request->content_refuse;
         if($content_refuse == null){
-            return redirect()->Route('seeadvance',array($id_project))->with('content_refuse','Content is empty');
+            return redirect()->Route('seeadvance',array($id_project))->with('content_refuse','Nội dung thông điệp trống !!');
         }else{
             
             $id_admin = session('data')['id'];    
@@ -505,7 +515,7 @@ class AdminController extends Controller
             $reason = $content_refuse;
 
             DB::table('refuses')->where('id',$id_refuse)->update(['id_admin'=> $id_admin, 'reason' => $reason, 'create_at' => $create_at]);
-            return redirect()->Route('seeadvance',array($id_project))->with('alert','Update message succesful');
+            return redirect()->Route('seeadvance',array($id_project))->with('alert','Cập nhật thông điệp thành công !!');
         }
     }
 
@@ -513,7 +523,7 @@ class AdminController extends Controller
         $id_project = $request->id_project;
         $id_refuse = $request->id_refuse;
         DB::table('refuses')->where('id',$id_refuse)->delete();
-        return redirect()->Route('seeadvance',array($id_project))->with('alert','Delete mesage succesful');
+        return redirect()->Route('seeadvance',array($id_project))->with('alert','Xóa thông điệp thành công !!');
     }
 
     public function redirectAdminConfirmAdvance(){
@@ -548,7 +558,7 @@ class AdminController extends Controller
         $user->save();
 
         $users = DB::table('users')->paginate(6);
-        return view('adminuser')->with(['users'=>$users,'alert'=>'Reset Password Succesful']);
+        return view('adminuser')->with(['users'=>$users,'alert'=>'Reset mật khẩu thành công. Mật khẩu ngẫu nhiên: 1234  !! ']);
     }
 
     public function redirectNotice(){
@@ -577,11 +587,11 @@ class AdminController extends Controller
             $notice->save();
 
             $notices = DB::table('notices')->orderBy('id','desc')->paginate(6);
-            return view('adminnotice')->with(['notices'=>$notices,'alert'=>'Add Notice Succesful']);
+            return view('adminnotice')->with(['notices'=>$notices,'alert'=>'Thêm thông báo thành công !! ']);
         }else{
             $notice->save();
             $notices = DB::table('notices')->orderBy('id','desc')->paginate(6);
-            return view('adminnotice')->with(['notices'=>$notices,'alert'=>'Add Notice Succesful']);
+            return view('adminnotice')->with(['notices'=>$notices,'alert'=>'Thêm thông báo thành công !! ']);
         }    
     }
 
@@ -595,7 +605,7 @@ class AdminController extends Controller
         DB::table('notices')->where('id',$id_notice)->delete();
 
         $notices = DB::table('notices')->orderBy('id','desc')->paginate(6);
-        return view('adminnotice')->with(['notices'=>$notices,'alert'=>'Delete Notice Succesful']);
+        return view('adminnotice')->with(['notices'=>$notices,'alert'=>'Xóa thông báo thành công !! ']);
     }
 
     public function redirectUpdateNotice(Request $request){
@@ -609,17 +619,17 @@ class AdminController extends Controller
         $title = $request->title;
         $content = $request->content;
 
-        $notice = \App\Notices::where('id',$id_notice)->first();
-        if($notice->linkdownload != null){
-            unlink($notice->linkdownload);
-        }
-
+        $notice = \App\Notices::where('id',$id_notice)->first(); 
         $notice->title = $title;
         $notice->content = $content;
         $notice->create_at = date("Y-m-d");
         $notice->id_employee = session('data')['id'];
 
         if($request->hasFile('file_notice')){
+            if($notice->linkdownload != null){
+                unlink($notice->linkdownload);
+            }
+
             $file = $request->file('file_notice');
             $type = $file->getClientOriginalExtension();
             $name = mt_rand();
@@ -630,13 +640,12 @@ class AdminController extends Controller
             $notice->save();
 
             $notices = DB::table('notices')->orderBy('id','desc')->paginate(6);
-            return view('adminnotice')->with(['notices'=>$notices,'alert'=>'Update Notice Succesful']);
+            return view('adminnotice')->with(['notices'=>$notices,'alert'=>'Cập nhật thông báo thành công !! ']);
         }else{
-            $notice->linkdownload = null;
             $notice->save();
 
             $notices = DB::table('notices')->orderBy('id','desc')->paginate(6);
-            return view('adminnotice')->with(['notices'=>$notices,'alert'=>'Update Notice Succesful']);
+            return view('adminnotice')->with(['notices'=>$notices,'alert'=>'Cập nhật thông báo thành công !! ']);
         }    
     }
 
@@ -650,9 +659,9 @@ class AdminController extends Controller
         $results = DB::table('results')->where('id_project',$id_project)->get();
 
         if($plan == null){
-            return Redirect('admin')->with('alert','Cant solve because this project isnt assigned to employee');
+            return Redirect('admin')->with('alert','Không thể thanh toán vì chuyến công tác này chưa thêm các khoản chi dự tính !!');
         }elseif($links == null){
-            return Redirect('admin')->with('alert','Cant solve because this project isnt added plan');
+            return Redirect('admin')->with('alert','Không thể thanh toán vì chuyến công tác này chưa phân công cho cán bộ !!');
         }else{
             foreach ($links as $key => $value) {
                 $id_employee = $value->id_employee;
@@ -718,14 +727,14 @@ class AdminController extends Controller
         $result->id_project = $id_project;
 
         $result->save();
-        return redirect()->Route('adminpayment',array($id_project))->with('alert','Solved for '.$name_employee);
+        return redirect()->Route('adminpayment',array($id_project))->with('alert','Thanh toán cho '.$name_employee);
     }
 
     public function deletePayment(Request $request){
         $id_project = $request->id_project;
         $id_result = $request->id_result;
         DB::table('results')->where('id',$id_result)->delete();
-        return redirect()->Route('adminpayment',array($id_project))->with('alert','Delete succesful');
+        return redirect()->Route('adminpayment',array($id_project))->with('alert','Xoá phiếu thanh toán thành công !!');
     }
 
     public function finishProject(Request $request){
@@ -737,7 +746,7 @@ class AdminController extends Controller
 
         // get id_employee in links table
         if($links == null){
-            return redirect()->Route('adminpayment',array($id_project))->with('alert','Cant finish project because this project isnt assigned to employee');
+            return redirect()->Route('adminpayment',array($id_project))->with('alert','Không thể kết thúc chuyến công tác vì chưa phân công cho cán bộ !!');
         }else{
             foreach ($links as $key => $value) {
                 $employees_links[] = $value->id_employee;
@@ -745,7 +754,7 @@ class AdminController extends Controller
         }
         // get id_employee in results table
         if($results == null){
-            return redirect()->Route('adminpayment',array($id_project))->with('alert','Cant finish project because this project isnt solved for anyone');
+            return redirect()->Route('adminpayment',array($id_project))->with('alert','Không thể kết thúc chuyến công tác vì chưa thanh toán cho cán bộ được phân công !!');
         }else{
             foreach ($results as $key => $value) {
                 $employees_results[] = $value->id_employee_r;
@@ -753,10 +762,10 @@ class AdminController extends Controller
         }
         //compare 2 array
         if(count($employees_links) != count($employees_results)){
-            return redirect()->Route('adminpayment',array($id_project))->with('alert','Cant finish project because this project isnt solved for all employee');
+            return redirect()->Route('adminpayment',array($id_project))->with('alert','Không thể kết thúc chuyến công tác vì chưa thanh toán cho tất cả cán bộ được phân công !!');
         }else{
             $project = DB::table('projects')->where('id',$id_project)->update(['status'=>3]);
-            return redirect()->Route('admin')->with('alert','Finished this project');
+            return redirect()->Route('admin')->with('alert','Đã kết thúc chuyến công tác !!');
         }
     }
 
@@ -783,7 +792,7 @@ class AdminController extends Controller
 
         $template->save();
 
-        return redirect('admintemplate')->with('alert','Add template succesful');
+        return redirect('admintemplate')->with('alert','Thêm mẫu đơn thành công !!');
     }
 
     public function deleteTemplate(Request $request){
@@ -793,7 +802,7 @@ class AdminController extends Controller
 
         DB::table('templates')->where('id',$id_template)->delete();
 
-        return redirect('admintemplate')->with('alert','Delete template succesful');    
+        return redirect('admintemplate')->with('alert','Xóa mẫu đơn thành công !!');    
     }
 
     public function redirectUpdateTemplate(Request $request){
@@ -823,6 +832,79 @@ class AdminController extends Controller
         $template->linkdownload = $link.$file_name.".".$type;
 
         $template->save();
-        return redirect()->Route('admintemplate')->with('alert','Update template succesful');
+        return redirect()->Route('admintemplate')->with('alert','Cập nhật mẫu đơn thành công !!');
+    }
+
+    public function findStatistic(Request $request){
+        $month = $request->month;
+        $year = $request->year;
+        $results = array();
+
+        if($month == "all"){
+            $projects = Results::select('id_project')->whereYear('date_finish',$year)->distinct()->get();
+            foreach ($projects as $value){
+                $name = DB::table('projects')->where('id',$value->id_project)->value('name_project');
+                $travel_cost = DB::table('results')->where('id_project',$value->id_project)->sum('travel_cost_r');
+                $rent_house = DB::table('results')->where('id_project',$value->id_project)->sum('rent_house_r');
+                $postage = DB::table('results')->where('id_project',$value->id_project)->sum('postage_r');
+                $postage_document = DB::table('results')->where('id_project',$value->id_project)->sum('postage_document_r');
+                $others = DB::table('results')->where('id_project',$value->id_project)->sum('others_r');
+                $overtime = DB::table('results')->where('id_project',$value->id_project)->sum('overtime');
+                $benifit = DB::table('results')->where('id_project',$value->id_project)->sum('benifit');
+                
+                $results[] = ['name'=> $name,'travel_cost_r'=>$travel_cost,'rent_house_r'=>$rent_house,'postage_r'=>$postage,'postage_document_r'=>$postage_document, 'others_r'=>$others, 'overtime'=>$overtime,'benifit'=>$benifit];
+            }
+        }else{
+            $projects = Results::select('id_project')->whereMonth('date_finish',$month)->whereYear('date_finish',$year)->distinct()->get();            
+            foreach ($projects as $value){
+                $name = DB::table('projects')->where('id',$value->id_project)->value('name_project');
+                $travel_cost = DB::table('results')->where('id_project',$value->id_project)->sum('travel_cost_r');
+                $rent_house = DB::table('results')->where('id_project',$value->id_project)->sum('rent_house_r');
+                $postage = DB::table('results')->where('id_project',$value->id_project)->sum('postage_r');
+                $postage_document = DB::table('results')->where('id_project',$value->id_project)->sum('postage_document_r');
+                $others = DB::table('results')->where('id_project',$value->id_project)->sum('others_r');
+                $overtime = DB::table('results')->where('id_project',$value->id_project)->sum('overtime');
+                $benifit = DB::table('results')->where('id_project',$value->id_project)->sum('benifit');
+                
+                $results[] = ['name'=> $name,'travel_cost_r'=>$travel_cost,'rent_house_r'=>$rent_house,'postage_r'=>$postage,'postage_document_r'=>$postage_document, 'others_r'=>$others, 'overtime'=>$overtime,'benifit'=>$benifit];
+            }
+        }
+
+        $january = Results::where(DB::raw("(DATE_FORMAT(date_finish,'%m'))"),1)->where(DB::raw("(DATE_FORMAT(date_finish,'%Y'))"),date('Y'))->get();
+        $february = Results::where(DB::raw("(DATE_FORMAT(date_finish,'%m'))"),2)->where(DB::raw("(DATE_FORMAT(date_finish,'%Y'))"),date('Y'))->get();
+        $march = Results::where(DB::raw("(DATE_FORMAT(date_finish,'%m'))"),3)->where(DB::raw("(DATE_FORMAT(date_finish,'%Y'))"),date('Y'))->get();
+        $april = Results::where(DB::raw("(DATE_FORMAT(date_finish,'%m'))"),4)->where(DB::raw("(DATE_FORMAT(date_finish,'%Y'))"),date('Y'))->get();
+        $may = Results::where(DB::raw("(DATE_FORMAT(date_finish,'%m'))"),5)->where(DB::raw("(DATE_FORMAT(date_finish,'%Y'))"),date('Y'))->get();
+        $june = Results::where(DB::raw("(DATE_FORMAT(date_finish,'%m'))"),6)->where(DB::raw("(DATE_FORMAT(date_finish,'%Y'))"),date('Y'))->get();
+        $july = Results::where(DB::raw("(DATE_FORMAT(date_finish,'%m'))"),7)->where(DB::raw("(DATE_FORMAT(date_finish,'%Y'))"),date('Y'))->get();
+        $august = Results::where(DB::raw("(DATE_FORMAT(date_finish,'%m'))"),8)->where(DB::raw("(DATE_FORMAT(date_finish,'%Y'))"),date('Y'))->get();
+        $september = Results::where(DB::raw("(DATE_FORMAT(date_finish,'%m'))"),9)->where(DB::raw("(DATE_FORMAT(date_finish,'%Y'))"),date('Y'))->get();
+        $october = Results::where(DB::raw("(DATE_FORMAT(date_finish,'%m'))"),10)->where(DB::raw("(DATE_FORMAT(date_finish,'%Y'))"),date('Y'))->get();
+        $november = Results::where(DB::raw("(DATE_FORMAT(date_finish,'%m'))"),11)->where(DB::raw("(DATE_FORMAT(date_finish,'%Y'))"),date('Y'))->get();
+        $december = Results::where(DB::raw("(DATE_FORMAT(date_finish,'%m'))"),12)->where(DB::raw("(DATE_FORMAT(date_finish,'%Y'))"),date('Y'))->get();
+
+        $chart =  new MyChart;
+        $chart->dataset('Statistics of completed projects', 'line', [count($january),count($february),count($march),count($april),count($may),count($june),count($july),count($august),count($september),count($october),count($november),count($december)])->color('#56aaff');
+        $chart->labels(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December ']);
+
+        $jan = Projects::where(DB::raw("(DATE_FORMAT(date_start,'%m'))"),1)->where(DB::raw("(DATE_FORMAT(date_start,'%Y'))"),date('Y'))->get();
+        $feb = Projects::where(DB::raw("(DATE_FORMAT(date_start,'%m'))"),2)->where(DB::raw("(DATE_FORMAT(date_start,'%Y'))"),date('Y'))->get();
+        $mar = Projects::where(DB::raw("(DATE_FORMAT(date_start,'%m'))"),3)->where(DB::raw("(DATE_FORMAT(date_start,'%Y'))"),date('Y'))->get();
+        $ap = Projects::where(DB::raw("(DATE_FORMAT(date_start,'%m'))"),4)->where(DB::raw("(DATE_FORMAT(date_start,'%Y'))"),date('Y'))->get();
+        $ma = Projects::where(DB::raw("(DATE_FORMAT(date_start,'%m'))"),5)->where(DB::raw("(DATE_FORMAT(date_start,'%Y'))"),date('Y'))->get();
+        $jun = Projects::where(DB::raw("(DATE_FORMAT(date_start,'%m'))"),6)->where(DB::raw("(DATE_FORMAT(date_start,'%Y'))"),date('Y'))->get();
+        $jul = Projects::where(DB::raw("(DATE_FORMAT(date_start,'%m'))"),7)->where(DB::raw("(DATE_FORMAT(date_start,'%Y'))"),date('Y'))->get();
+        $aug = Projects::where(DB::raw("(DATE_FORMAT(date_start,'%m'))"),8)->where(DB::raw("(DATE_FORMAT(date_start,'%Y'))"),date('Y'))->get();
+        $sep = Projects::where(DB::raw("(DATE_FORMAT(date_start,'%m'))"),9)->where(DB::raw("(DATE_FORMAT(date_start,'%Y'))"),date('Y'))->get();
+        $oc= Projects::where(DB::raw("(DATE_FORMAT(date_start,'%m'))"),10)->where(DB::raw("(DATE_FORMAT(date_start,'%Y'))"),date('Y'))->get();
+        $nov = Projects::where(DB::raw("(DATE_FORMAT(date_start,'%m'))"),11)->where(DB::raw("(DATE_FORMAT(date_start,'%Y'))"),date('Y'))->get();
+        $dec = Projects::where(DB::raw("(DATE_FORMAT(date_start,'%m'))"),12)->where(DB::raw("(DATE_FORMAT(date_start,'%Y'))"),date('Y'))->get();  
+
+
+        $chart_p =  new MyChart;
+        $chart_p->dataset('Statistics project in year', 'line', [count($jan),count($feb),count($mar),count($ap),count($ma),count($jun),count($jul),count($aug),count($sep),count($oc),count($nov),count($dec)])->color('#56aaff');
+        $chart_p->labels(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December ']); 
+
+        return view('statistic')->with(['chart'=>$chart,'chart_p'=>$chart_p,'results'=>$results]);
     }
 }

@@ -14,7 +14,7 @@
 		            <span class="alert alert-success form-control" style="margin: auto;">{!! $alert_advance !!}</span>
 		            @endif
 		        </div>
-				<legend class ="text-info" style ="text-align: left;">Advance</legend>
+				<legend class ="text-info" style ="text-align: center;">Phiếu tạm ứng </legend>
 
 				@if(isset($project))					
 					@if($project['status'] == 1)
@@ -158,7 +158,7 @@
 	          			<label class="col-md-2 control-label" ></label>  
 	          			<div class="col-md-4">
 	          				<div class="btn-group-btn-group-lg">
-			         		<button type="submit" class="btn btn-success"  <?php if(!isset($project)|| (isset($project) && $project['status'] == 2)){echo"disabled";}?> >Advance or Update <i class="fas fa-arrow-circle-right" ></i></button>
+			         		<button type="submit" class="btn btn-success"  <?php if(!isset($project)|| (isset($project) && $project['status'] == 2)){echo"disabled";}?> >Tạm ứng hoặc cập nhật  <i class="fas fa-arrow-circle-right" ></i></button>
 			         		</div>  
 			         	</div>
 			         </div>
@@ -190,14 +190,14 @@
 		<table class="table table-bordered table-hover" style="margin-left:10px; ">
 		    <thead>
 		      <tr>
-		        <th>Project_name</th>
-		        <th>Date_advance</th>
-		        <th>Cost_travel</th>
-		        <th>Rent_house</th>
-				<th>Postage</th>
-				<th>Document</th>
-				<th>Other</th>
-				<th>Total</th>
+		        <th class="text-info"> Name </th>
+		        <th class="text-info"> Date </th>
+		        <th class="text-info"> Travel</th>
+		        <th class="text-info"> Rent</th>
+				<th class="text-info"> Postage</th>
+				<th class="text-info"> Document</th>
+				<th class="text-info"> Others</th>
+				<th class="text-info"> Total</th>
 		      </tr>
 		    </thead>
 		    <tbody>

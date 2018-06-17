@@ -38,7 +38,7 @@ class ExcuteAccount extends Controller
         $imformations->phone = $phone;
         $imformations->save();
 
-        return view('createaccount')->with('alert','Create Account successfull');
+        return view('createaccount')->with('alert','Tạo tài khoản thành công !! ');
     }
 
     public function getDataUser(Request $request){
@@ -65,7 +65,7 @@ class ExcuteAccount extends Controller
         $imformations = \App\Imformations::find($id)->toArray();
         $values = ['user' => $users,'imformation' => $imformations];
         return view('updateprofile')->with(['values'=>$values,'error'=>$error]);
-    }
+    } 
 
     public function excuteUpdateFile(Request $request){
         $id = $request->id;
@@ -85,27 +85,33 @@ class ExcuteAccount extends Controller
         $imforUpdate->male = $gender;
         $imforUpdate->birth = $birth;
         $imforUpdate->address = $address;
-        $imforUpdate->phone = $phone;
+        $imforUpdate->phone = $phone; 
 
         if($request->hasFile('avatar')){
+            $imformation = \App\Imformations::where('id',$id)->first();
+            if($imformation->avatar != null){
+                unlink($imformation->avatar);
+            }
+
             $file = $request->file('avatar');
             if(in_array($file->getClientOriginalExtension(),['png','jpg','jpeg'])){
-                $photo_name = $file->getClientOriginalName();
+                $photo_name = mt_rand();
+                $type = $file->getClientOriginalExtension();
                 $link = "images/avatars/";
-                $file->move($link,$photo_name);
-                $imforUpdate->avatar = $link.$photo_name;
+                $file->move($link,$photo_name.".".$type);
+                $imforUpdate->avatar = $link.$photo_name.".".$type;
                 
                 $userUpdate->save();
                 $imforUpdate->save();
-                return view('employeepage')->with('alert','Update succesful');
+                return redirect()->Route('loadnotices')->with('alert','Cập nhật thành công !!');
             }else{
-                $error = "Invalid format file or Size of file is too big";
+                $error = "Không đúng định dạng file hoặc kích cỡ file quá lớn !!";
                 return redirect()->Route('updateprofile',array($id,$error));
             }
         }else{
             $userUpdate->save();
             $imforUpdate->save();
-            return view('employeepage')->with('alert','Update succesful');
+            return redirect()->Route('loadnotices')->with('alert','Cập nhật thành công !!');
         }
     }
 
@@ -124,6 +130,6 @@ class ExcuteAccount extends Controller
         $userUpdate->password = bcrypt($newpass);
         $userUpdate->save();
 
-        return view('employeepage')->with('alert','Change password succesful');
+        return view('employeepage')->with('alert','Đổi mật khẩu thành công !!');
     }
 }

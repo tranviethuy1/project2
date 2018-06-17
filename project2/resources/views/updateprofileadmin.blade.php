@@ -32,17 +32,15 @@
 	  ?>
     <div class="container">
     	<div class="row add_product_title">
-    		<div class="col-2">
+    		<div class="col-3">
 	    		<div class="title_home">
-					<a href="{{URL::Route('admin')}}" >Back
+					<a href="{{URL::Route('admin')}}" >Trở về trang chủ
 						<i class="fas fa-backward"></i>
 					</a>
 				</div>
     		</div>
-    		<div class="col-1"></div>
-    		<div class="col-1"></div>
-    		<div class="col-4">
-    			<div class="title_add_product">Update Profile</div>
+    		<div class="col-7">
+    			<div class="text-info title_add_product">Cập nhật thông tin cá nhân</div>
     		</div>
     		<div class="col-4"></div>
     	</div>

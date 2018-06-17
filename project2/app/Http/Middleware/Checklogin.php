@@ -17,7 +17,7 @@ class Checklogin
     public function handle($request, Closure $next)
     {
         if(!Auth::check()){
-            return redirect('/')->with('error','You must login before');
+            return redirect('/')->with('error','Bạn chưa đăng nhập !!');
         }
         return $next($request);
     }

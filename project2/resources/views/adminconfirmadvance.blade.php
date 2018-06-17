@@ -6,7 +6,7 @@
 	?>
 	
 	<div class ="row">
-		<div class ="col-md-5"><legend class ="text-info">Displaying paid advances</legend></div>	
+		<legend class ="text-info">Danh sách các phiếu tạm ứng đã duyệt </legend>	
 	</div>
 
 	<div class ="row">
@@ -14,12 +14,12 @@
 			<table class="table table-bordered table-striped">
 			    <thead>
 			      <tr>
-			        <th>ID </th>
-			        <th>Name Project</th>
-			        <th>Project Manager</th>
-			        <th>Date Start</th>
-			        <th>Status</th>
-			        <th></th>
+			        <th class="text-info">ID </th>
+			        <th class="text-info">Project</th>
+			        <th class="text-info">Manager</th>
+			        <th class="text-info">Start</th>
+			        <th class="text-info">Status</th>
+			        <th class="text-info"></th>
 			      </tr>
 			    </thead>
 			    <tbody>

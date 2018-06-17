@@ -19,15 +19,15 @@ class Checkupdatenotice
         $title = $request->title;
         $content = $request->content;
         if(empty($title)){
-            return redirect()->Route('updatenotice',array($id_notice))->with('title','Title is empty');
+            return redirect()->Route('updatenotice',array($id_notice))->with('title','Tiêu đề không được trống !!');
         }
         if(empty($content)){
-             return redirect()->Route('updatenotice',array($id_notice))->with('title','Content is empty');
+             return redirect()->Route('updatenotice',array($id_notice))->with('title','Nội dụng không được trống !!');
         }
         if($request->hasFile('file_notice')){
             $file = $request->file('file_notice');
             if(!in_array($file->getClientOriginalExtension(),['png','jpg','jpeg','doc','docx','ppt','pptx','odt','ods','pdf'])){
-                 return redirect()->Route('updatenotice',array($id_notice))->with('file','File is unvalid format');
+                 return redirect()->Route('updatenotice',array($id_notice))->with('file','File không đúng định dạng !!');
             }
         }
 

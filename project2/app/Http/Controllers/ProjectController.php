@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 use App\Project;
 use App\Advances;
 use App\User;
+use App\Results;
 use DB;
+use App\Charts\MyChart;
+use App\Projects;
+
 class ProjectController extends Controller
 {
     public function checkproject(Request $request){
@@ -59,7 +63,11 @@ class ProjectController extends Controller
                     return view('advance')->with(['id'=>$id,'project'=>$project,'plan'=>$plan]);
                 }else{
                     $refuses = DB::table('refuses')->where('id_advance',$advance->id)->get();
-                    return view('advance')->with(['id'=>$id,'project'=>$project,'advance'=>$advance,'plan'=>$plan, 'refuses'=>$refuses]);
+                    if(count($refuses) != 0){
+                        return view('advance')->with(['id'=>$id,'project'=>$project,'advance'=>$advance,'plan'=>$plan, 'refuses'=>$refuses]);
+                    }else{
+                        return view('advance')->with(['id'=>$id,'project'=>$project,'advance'=>$advance,'plan'=>$plan]);
+                    }
                 }
             }else{
                  return view('advance')->with('id',$id);
@@ -117,7 +125,7 @@ class ProjectController extends Controller
             $adv->id_project = $id_project; 
             $adv->save();
             $project = \App\Projects::where('id',$id_project)->first()->toArray();
-            return view('advance')->with(['id'=>$id,'project'=>$project,'advance'=>$adv,'alert_advance'=>'Advance successful','day'=>$day]);
+            return view('advance')->with(['id'=>$id,'project'=>$project,'advance'=>$adv,'alert_advance'=>'Tạo phiếu tạm ứng thành công !!','day'=>$day]);
         }else{
             $advance->id_employee = $id;
             $advance->advance_date = date("Y-m-d");
@@ -129,7 +137,7 @@ class ProjectController extends Controller
             $advance->id_project = $id_project; 
             $advance->save();
             $project = \App\Projects::where('id',$id_project)->first()->toArray();
-            return view('advance')->with(['id'=>$id,'project'=>$project,'advance'=>$advance,'alert_advance'=>'Update successful','day'=>$day]);
+            return view('advance')->with(['id'=>$id,'project'=>$project,'advance'=>$advance,'alert_advance'=>'Cập nhật thành công !!','day'=>$day]);
         }
     }
 
@@ -162,7 +170,7 @@ class ProjectController extends Controller
         return view('paymentemployee')->with(['id'=>$id,'payments'=>$results]);
     }
 
-        public function findPayment(Request $request){
+    public function findPayment(Request $request){
         $name_project = $request->name_project;
         $id_employee =$request->id;
         $name_project = strtolower($name_project);
@@ -194,4 +202,76 @@ class ProjectController extends Controller
 
         return view('adminproject')->with(['projects'=>$projects,'data_project'=>$data_project]);
     }
+
+    public function findProject(Request $request){
+        $name = $request->search;
+        $projects =DB::table('projects')->where('status',3)->where('name_project',$name)->paginate(2);
+        $data_project = array();
+
+        foreach($projects as $project){
+            $plans = DB::table('plans')->where('id_project',$project->id)->first();
+            $links = DB::table('links')->where('id_project',$project->id)->get();
+            $advances = DB::table('advances')->where('id_project',$project->id)->get();
+            $results = DB::table('results')->where('id_project',$project->id)->get();
+
+            $data_project[] = [$project->id=>['plans'=>$plans,'links'=>$links,'advances'=>$advances,'results'=>$results]];
+        }
+
+        return view('adminproject')->with(['projects'=>$projects,'data_project'=>$data_project]);
+    }
+
+    public function showStatistic(){
+        $january = Results::where(DB::raw("(DATE_FORMAT(date_finish,'%m'))"),1)->where(DB::raw("(DATE_FORMAT(date_finish,'%Y'))"),date('Y'))->get();
+        $february = Results::where(DB::raw("(DATE_FORMAT(date_finish,'%m'))"),2)->where(DB::raw("(DATE_FORMAT(date_finish,'%Y'))"),date('Y'))->get();
+        $march = Results::where(DB::raw("(DATE_FORMAT(date_finish,'%m'))"),3)->where(DB::raw("(DATE_FORMAT(date_finish,'%Y'))"),date('Y'))->get();
+        $april = Results::where(DB::raw("(DATE_FORMAT(date_finish,'%m'))"),4)->where(DB::raw("(DATE_FORMAT(date_finish,'%Y'))"),date('Y'))->get();
+        $may = Results::where(DB::raw("(DATE_FORMAT(date_finish,'%m'))"),5)->where(DB::raw("(DATE_FORMAT(date_finish,'%Y'))"),date('Y'))->get();
+        $june = Results::where(DB::raw("(DATE_FORMAT(date_finish,'%m'))"),6)->where(DB::raw("(DATE_FORMAT(date_finish,'%Y'))"),date('Y'))->get();
+        $july = Results::where(DB::raw("(DATE_FORMAT(date_finish,'%m'))"),7)->where(DB::raw("(DATE_FORMAT(date_finish,'%Y'))"),date('Y'))->get();
+        $august = Results::where(DB::raw("(DATE_FORMAT(date_finish,'%m'))"),8)->where(DB::raw("(DATE_FORMAT(date_finish,'%Y'))"),date('Y'))->get();
+        $september = Results::where(DB::raw("(DATE_FORMAT(date_finish,'%m'))"),9)->where(DB::raw("(DATE_FORMAT(date_finish,'%Y'))"),date('Y'))->get();
+        $october = Results::where(DB::raw("(DATE_FORMAT(date_finish,'%m'))"),10)->where(DB::raw("(DATE_FORMAT(date_finish,'%Y'))"),date('Y'))->get();
+        $november = Results::where(DB::raw("(DATE_FORMAT(date_finish,'%m'))"),11)->where(DB::raw("(DATE_FORMAT(date_finish,'%Y'))"),date('Y'))->get();
+        $december = Results::where(DB::raw("(DATE_FORMAT(date_finish,'%m'))"),12)->where(DB::raw("(DATE_FORMAT(date_finish,'%Y'))"),date('Y'))->get();
+
+        $chart =  new MyChart;
+        $chart->dataset('Statistics of completed projects', 'line', [count($january),count($february),count($march),count($april),count($may),count($june),count($july),count($august),count($september),count($october),count($november),count($december)])->color('#56aaff');
+        $chart->labels(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December ']);
+
+        $jan = Projects::where(DB::raw("(DATE_FORMAT(date_start,'%m'))"),1)->where(DB::raw("(DATE_FORMAT(date_start,'%Y'))"),date('Y'))->get();
+        $feb = Projects::where(DB::raw("(DATE_FORMAT(date_start,'%m'))"),2)->where(DB::raw("(DATE_FORMAT(date_start,'%Y'))"),date('Y'))->get();
+        $mar = Projects::where(DB::raw("(DATE_FORMAT(date_start,'%m'))"),3)->where(DB::raw("(DATE_FORMAT(date_start,'%Y'))"),date('Y'))->get();
+        $ap = Projects::where(DB::raw("(DATE_FORMAT(date_start,'%m'))"),4)->where(DB::raw("(DATE_FORMAT(date_start,'%Y'))"),date('Y'))->get();
+        $ma = Projects::where(DB::raw("(DATE_FORMAT(date_start,'%m'))"),5)->where(DB::raw("(DATE_FORMAT(date_start,'%Y'))"),date('Y'))->get();
+        $jun = Projects::where(DB::raw("(DATE_FORMAT(date_start,'%m'))"),6)->where(DB::raw("(DATE_FORMAT(date_start,'%Y'))"),date('Y'))->get();
+        $jul = Projects::where(DB::raw("(DATE_FORMAT(date_start,'%m'))"),7)->where(DB::raw("(DATE_FORMAT(date_start,'%Y'))"),date('Y'))->get();
+        $aug = Projects::where(DB::raw("(DATE_FORMAT(date_start,'%m'))"),8)->where(DB::raw("(DATE_FORMAT(date_start,'%Y'))"),date('Y'))->get();
+        $sep = Projects::where(DB::raw("(DATE_FORMAT(date_start,'%m'))"),9)->where(DB::raw("(DATE_FORMAT(date_start,'%Y'))"),date('Y'))->get();
+        $oc= Projects::where(DB::raw("(DATE_FORMAT(date_start,'%m'))"),10)->where(DB::raw("(DATE_FORMAT(date_start,'%Y'))"),date('Y'))->get();
+        $nov = Projects::where(DB::raw("(DATE_FORMAT(date_start,'%m'))"),11)->where(DB::raw("(DATE_FORMAT(date_start,'%Y'))"),date('Y'))->get();
+        $dec = Projects::where(DB::raw("(DATE_FORMAT(date_start,'%m'))"),12)->where(DB::raw("(DATE_FORMAT(date_start,'%Y'))"),date('Y'))->get();  
+
+
+        $chart_p =  new MyChart;
+        $chart_p->dataset('Statistics project in year', 'line', [count($jan),count($feb),count($mar),count($ap),count($ma),count($jun),count($jul),count($aug),count($sep),count($oc),count($nov),count($dec)])->color('#56aaff');
+        $chart_p->labels(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December ']);  
+
+        $results = array();
+        $projects = Results::select('id_project')->distinct()->get();
+        foreach ($projects as $value) {
+            $name = DB::table('projects')->where('id',$value->id_project)->value('name_project');
+            $travel_cost = DB::table('results')->where('id_project',$value->id_project)->sum('travel_cost_r');
+            $rent_house = DB::table('results')->where('id_project',$value->id_project)->sum('rent_house_r');
+            $postage = DB::table('results')->where('id_project',$value->id_project)->sum('postage_r');
+            $postage_document = DB::table('results')->where('id_project',$value->id_project)->sum('postage_document_r');
+            $others = DB::table('results')->where('id_project',$value->id_project)->sum('others_r');
+            $overtime = DB::table('results')->where('id_project',$value->id_project)->sum('overtime');
+            $benifit = DB::table('results')->where('id_project',$value->id_project)->sum('benifit');
+            $results[] = ['name'=> $name,'travel_cost_r'=>$travel_cost,'rent_house_r'=>$rent_house,'postage_r'=>$postage,'postage_document_r'=>$postage_document, 'others_r'=>$others, 'overtime'=>$overtime,'benifit'=>$benifit];
+        }
+
+        return view('statistic')->with(['chart'=>$chart,'chart_p'=>$chart_p,'results'=>$results]);
+    }
+
+
 }

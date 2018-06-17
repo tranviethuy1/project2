@@ -1,7 +1,7 @@
 @extends('layout.adminlayout')
 @section('rightcontent')
 	<div class="row">
-		<div class ="col-md-5"><legend class ="text-info" >Add plan for project</legend></div>
+		<legend class ="text-info" >Chi phí chi tiết cho dự án </legend>
 	</div>
 
 	<div class="row">
@@ -176,11 +176,11 @@
 				    	<div class="col-md-2"></div>
 				    	<div class="col-md-4">
 				    		@if(!isset($plan))
-				    		<button type="submit" class="btn btn-success"> Add Plan</button>
-				    		<a href="{{Route('admin')}}" class="btn btn-primary"> Back to Home</a>
+				    		<button type="submit" class="btn btn-success"> Add Plan <i class="fas fa-plus-square"></i></button>
+				    		<a href="{{Route('admin')}}" class="btn btn-primary"> Back to Home <i class="fas fa-arrow-circle-right"></i></a>
 				    		@else
-							<a href="{{Route('updateplan',array($id,$project->id))}}" class="btn btn-success"> Fix Plan</a>
-							<a href="{{Route('admin')}}" class="btn btn-primary"> Back to Home</a>
+							<a href="{{Route('updateplan',array($id,$project->id))}}" class="btn btn-success"> Fix Plan <i class="fas fa-wrench"></i></a>
+							<a href="{{Route('admin')}}" class="btn btn-primary"> Back to Home <i class="fas fa-arrow-circle-right"></i></a>
 				    		@endif
 				    	</div>
 				    </div>								

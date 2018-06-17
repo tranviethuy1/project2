@@ -10,5 +10,4 @@ class TemplateController extends Controller
 		$lists = DB::table('templates')->paginate('6');
 		return view('template')->with('lists',$lists);
 	}
-	
 }

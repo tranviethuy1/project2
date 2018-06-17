@@ -106,8 +106,8 @@
 			    .appendTo('#slideshow');
 			},  3000);
 		});
-	</script> -->
-
+	</script>
+ -->
 		<div class="header--inner header--pc">
 				<div class ="row">
 					<div class="col-md-3">
@@ -134,12 +134,12 @@
 			<div class="row">
 				<div class="col-md-3 panel">
 				    <div class="panel panel-default sidebar">
-					    <div class="panel-heading title_home"><i class="fas fa-home"></i><a href="{{Route('employeepage')}}" class="title">Home</a></div>
+					    <div class="panel-heading title_home"><i class="fas fa-home"></i><a href="{{Route('loadnotices')}}" class="title">Home</a></div>
 					    <div class="panel-body"><li><i class="fas fa-check-square"></i><a href="{{URL::Route('checkproject',array($id))}}" class="title">Check project</a></li></div>
 					    <div class="panel-body"><li><i class="fas fa-clipboard"></i><a href="{{Route('advanceview',array($id))}}" class="title">Advance</a></li></div>
 					    <div class="panel-body"><li><i class="fas fa-history"></i><a href="{{Route('history',array($id))}}" class="title">History</a></li></div>
 					    <div class="panel-body"><li><i class="fas fa-book"></i><a href="{{Route('payment',array($id))}}" class="title">Payment</a></li></div>
-					    <div class="panel-body"><li><i class="fas fa-envelope-open"></i><a href="{{Route('loadnotices')}}" class="title">Notice</a></li></div>
+					    <!-- <div class="panel-body"><li><i class="fas fa-envelope-open"></i><a href="{{Route('loadnotices')}}" class="title">Notice</a></li></div> -->
 					    <div class="panel-body"><li><i class="fas fa-file"></i><a href="{{Route('listtemplate')}}" class="title">Template</a></li></div>
 						<div class="panel-body"><video src="http://www.w3schools.com/html/mov_bbb.mp4" width="285" height="285" controls loop>Your browser does not support.</video></div>
 						<div class="panel-body"><iframe src="https://player.vimeo.com/video/11774747" width="285" height="285" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
@@ -149,7 +149,7 @@
 				<div class="col-md-9">
 					<div class="status">
 						@if(session('alert'))
-						<span class="alert alert-danger form-control">{!! session('alert') !!}</span>
+						<span class="alert alert-success form-control">{!! session('alert') !!}</span>
 					    @endif
 					    @if(isset($alert))
 					    <span class="alert alert-success form-control">{!! $alert !!}</span>

@@ -29,16 +29,16 @@ class Checkadvance
 
         
         if(!isset($day)){
-            return redirect()->Route('advanceview',array($id))->with('days','Day is emty');
+            return redirect()->Route('advanceview',array($id))->with('days','Số ngày công tác không được trống !!');
         }elseif( (isset($travel_cost) && !is_numeric($travel_cost)) || (isset($day) && !is_numeric($day))|| (isset($postage) && !is_numeric($postage)) || (isset($postage_document) && !is_numeric($postage_document))|| (isset($others) && !is_numeric($others))){
-            return redirect()->Route('advanceview',array($id))->with('alert','Unvalid number format');
+            return redirect()->Route('advanceview',array($id))->with('alert','Không đúng định dạng số !!');
         }elseif ($day<0 || $day >30) {
-            return redirect()->Route('advanceview',array($id))->with('days','Day is more than 30 days');           
+            return redirect()->Route('advanceview',array($id))->with('days','Số ngày công tác không vượt quá 30 ngày !!');           
         } 
 
         if(isset($plan)){
             if($day != $plan->days){
-                return redirect()->Route('advanceview',array($id))->with('days','Day is diffirent from day in plan of project');  
+                return redirect()->Route('advanceview',array($id))->with('days','Số ngày công tác khác với kế hoạch ban đầu của chuyến công tác !!');  
             }
         }   
 

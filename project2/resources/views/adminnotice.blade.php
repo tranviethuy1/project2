@@ -5,7 +5,7 @@
 		$name = session('data')['name'];
 	?>
 	<div class="row">
-		<div class ="col-md-3"><legend class ="text-info">Add Notice</legend></div>
+		<legend class ="text-info">Thêm thông báo </legend>
 	</div>
 	<div class="row">
 		<div class="col-md-12">	
@@ -14,7 +14,7 @@
 			    <div class="form-group">
 			    	<div class="row">
 				    	<div class="col-md-1"></div>
-				     	<label class="control-label col-md-1" for="t">Title:</label>
+				     	<label class="control-label col-md-1" for="t">Title*:</label>
 				      	<div class="col-md-4">
 				        	<input type="text" class="form-control" id="title" name="title">
 				        	@if(session()->has('title'))
@@ -28,7 +28,7 @@
 			    <div class="form-group">
 				    <div class="row">
 				    	<div class="col-md-1"></div>
-				      	<label class="control-label col-md-1" for="f">Content:</label>
+				      	<label class="control-label col-md-1" for="f">Content*:</label>
 				      	<div class="col-md-6">          
 				        	<textarea rows="4" cols="50" id="content" class="ckeditor" name="content"></textarea>
 				        	@if(session()->has('content'))
@@ -49,15 +49,16 @@
 							<span class="text-danger">{!! session('file')!!}</span>
 							@endif				        	
 				     	</div>
-				     	<div class="col-md-5"><span class="text-info">(** File of Notice (can NULL) **)</span></div>
+				     	<div class="col-md-5"></div>
 				    </div>	
 			    </div>
 
 				<div class="form-group">
 					<div class="row">
 				    	<div class="col-md-2"></div>
-				    	<div class="col-md-4">
-				    		<button type="submit" class="btn btn-success" onclick="return sendAlert('Make sure you enter enough information!!')"> Add Notice <i class="fas fa-newspaper"></i></button>
+				    	<div class="col-md-5">
+				    		<button type="submit" class="btn btn-success" onclick="return sendAlert('Chắc chắn rằng bạn đã nhập đầy đủ thông tin !!')"> Add Notice <i class="fas fa-newspaper"></i></button>
+				    		<span class="text-danger"> Chú ý * thông tin bắt buộc</span>
 				    	</div>
 				    </div>								
 				</div>
@@ -66,14 +67,14 @@
 	</div>
 
 	<div class = "row" style="margin-top:50px; padding: 0px;">
-		<legend class="text-info">All Notices</legend>
+		<legend class="text-info">Danh sách thông báo </legend>
 		<table class="table table-bordered table-hover table-striped">
 		    <thead>
 		      <tr>
-		        <th>ID </th>
-		        <th>Title</th>
-		        <th>Date Start</th>
-		        <th>Admin</th>
+		        <th class="text-info">ID </th>
+		        <th class="text-info">Title</th>
+		        <th class="text-info">Date Start</th>
+		        <th class="text-info">Admin</th>
 		        <th></th>
 		      </tr>
 		    </thead>
@@ -87,7 +88,7 @@
 			        <td><?php $admin = \App\User::where('id',$notice->id_employee)->first(); echo $admin->name;?> </td>
 			        <td>
 			        	<a href="{{Route('updatenotice',array($notice->id))}}" class="btn btn-secondary">Update <i class="fas fa-edit"></i></a>
-			        	<a href="{{Route('deletenotice',array($notice->id))}}" onclick="return sendAlert('Do you want to delete this notice?')" class="btn btn-info">Delete <i class="fas fa-trash-alt"></i></a>
+			        	<a href="{{Route('deletenotice',array($notice->id))}}" onclick="return sendAlert('Bạn có muốn xóa thông báo này không ?')" class="btn btn-info">Delete <i class="fas fa-trash-alt"></i></a>
 			        </td>
 			    </tr>
 			@endforeach    

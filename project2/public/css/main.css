@@ -464,14 +464,13 @@ iframe {
 .welcome{
   font-size: 20px;
   font-family: Antiqua;
-  font-style:italic;
+  font-style: normal;
 }
 .admin{
-
-  font-size: 14px;
+  font-size: 16px;
   font-family: Antiqua;
   text-align: center;
-  font-style:italic;
+  font-style: normal;
 }
 .image{
   width: 250px;

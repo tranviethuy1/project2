@@ -6,7 +6,7 @@
 	?>
 
 	<div class="row">
-		<div class ="col-md-3"><legend class ="text-info">Add Project</legend></div>
+		<legend class ="text-info">Thêm chuyến công tác </legend>
 	</div>
 	<div class="row">
 		<div class="col-md-12">	
@@ -15,7 +15,7 @@
 			    <div class="form-group">
 			    	<div class="row">
 				    	<div class="col-md-1"></div>
-				     	<label class="control-label col-md-2" for="pn">Project Name:</label>
+				     	<label class="control-label col-md-2" for="pn">Project Name*:</label>
 				      	<div class="col-md-4">
 				        	<input type="text" class="form-control" id="projectname" name="project_name">
 				        	@if(session()->has('name'))
@@ -29,7 +29,7 @@
 			    <div class="form-group">
 			    	<div class="row">
 				    	<div class="col-md-1"></div>
-				     	<label class="control-label col-md-2" for="ds">Date start:</label>
+				     	<label class="control-label col-md-2" for="ds">Date start*:</label>
 				      	<div class="col-md-4">
 				        	<input type="text" class="form-control" id="date_start" name="date_start">
 				        	@if(session()->has('date'))
@@ -43,7 +43,7 @@
 			    <div class="form-group">
 				    <div class="row">
 				    	<div class="col-md-1"></div>
-				      	<label class="control-label col-md-2" for="de">Describe:</label>
+				      	<label class="control-label col-md-2" for="de">Describe*:</label>
 				      	<div class="col-md-6">          
 				        	<textarea rows="4" cols="50" id="describe" class="ckeditor" name="describe"></textarea>
 				        	@if(session()->has('describe'))
@@ -57,8 +57,9 @@
 				<div class="form-group">
 					<div class="row">
 				    	<div class="col-md-3"></div>
-				    	<div class="col-md-4">
+				    	<div class="col-md-5">
 				    		<button type="submit" class="btn btn-success"> Add Project <i class="fas fa-plus-circle"></i></button>
+				    		<span class="text-danger"> Chú ý * thông tin bắt buộc </span>
 				    	</div>
 				    </div>								
 				</div>
@@ -67,15 +68,15 @@
 	</div>
 	
 	<div class = "row" style="margin-top:50px; ">
-		<legend class="text-info">All projects are not finished </legend>
+		<legend class="text-info">Danh sách chuyến công tác chưa kết thúc  </legend>
 		<table class="table table-bordered table-striped">
 		    <thead>
 		      <tr>
-		        <th>ID </th>
-		        <th>Name Project</th>
-		        <th>Project Manager</th>
-		        <th>Date Start</th>
-		        <th>Accept</th>
+		        <th class="text-info">ID </th>
+		        <th class="text-info">Name </th>
+		        <th class="text-info">Manager </th>
+		        <th class="text-info">Start </th>
+		        <th class="text-info">Accept </th>
 		        <th></th>
 		      </tr>
 		    </thead>

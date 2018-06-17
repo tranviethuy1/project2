@@ -2,7 +2,7 @@
 @section('rightcontent')
 
 	<div class="row">
-		<div class ="col-md-5"><legend class ="text-info" >Add plan for project</legend></div>
+		<legend class ="text-info" >Cập nhật chi phí chi tiết cho dự án </legend>
 	</div>
 
 	<div class="row">
@@ -139,8 +139,8 @@
 					<div class="row">
 				    	<div class="col-md-2"></div>
 				    	<div class="col-md-4">
-				    		<button type="submit" class="btn btn-success"> Update Plan</button>
-				    		<a href="{{Route('admin')}}" class="btn btn-primary"> Back to Home</a>
+				    		<button type="submit" class="btn btn-success"> Update Plan <i class="fas fa-wrench"></i></button>
+				    		<a href="{{Route('admin')}}" class="btn btn-primary"> Back to Home <i class="fas fa-arrow-circle-right"></i></a>
 				    	</div>
 				    </div>								
 				</div>

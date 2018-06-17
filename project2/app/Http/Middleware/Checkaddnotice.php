@@ -18,15 +18,15 @@ class Checkaddnotice
         $title = $request->title;
         $content = $request->content;
         if(empty($title)){
-            return redirect('adminnotice')->with('title','Title is empty');
+            return redirect('adminnotice')->with('title','Tiêu đề không được trống !!');
         }
         if(empty($content)){
-            return redirect('adminnotice')->with('content','Content is empty');
+            return redirect('adminnotice')->with('content','Nội dung không được trống !!');
         }
         if($request->hasFile('file_notice')){
             $file = $request->file('file_notice');
             if(!in_array($file->getClientOriginalExtension(),['png','jpg','jpeg','doc','docx','ppt','pptx','odt','ods','pdf'])){
-                return redirect('adminnotice')->with('file','File is unvalid format');
+                return redirect('adminnotice')->with('file','Không đúng định dạng file !!');
             }
         }
 

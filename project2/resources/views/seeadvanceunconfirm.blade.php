@@ -211,13 +211,13 @@
 		<table class="table table-bordered table-striped">
 		    <thead>
 		      <tr>
-		        <th>Name</th>
-		        <th>Date advance</th>
-		        <th>Traveling</th>
-		        <th>Rent house</th>
-				<th>Postage</th>
-				<th>Document</th>
-				<th>Others</th>	
+		        <th class="text-info">Name</th>
+		        <th class="text-info">Date advance</th>
+		        <th class="text-info">Traveling</th>
+		        <th class="text-info">Rent house</th>
+				<th class="text-info">Postage</th>
+				<th class="text-info">Document</th>
+				<th class="text-info">Others</th>	
 				<th></th>	
 		      </tr>
 		    </thead>

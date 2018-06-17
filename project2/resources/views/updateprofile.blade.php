@@ -32,17 +32,15 @@
 	  ?>
     <div class="container">
     	<div class="row add_product_title">
-    		<div class="col-2">
+    		<div class="col-3">
 	    		<div class="title_home">
-					<a href="{{URL::Route('employeeback',array('id'=>$id,'name'=>$name))}}" >Back
+					<a href="{{Route('loadnotices')}}" >Trở về trang chủ
 						<i class="fas fa-backward"></i>
 					</a>
 				</div>
     		</div>
-    		<div class="col-1"></div>
-    		<div class="col-1"></div>
-    		<div class="col-4">
-    			<div class="title_add_product">Update Profile</div>
+    		<div class="col-7">
+    			<div class="text-info title_add_product">Cập nhật thông tin cá nhân</div>
     		</div>
     		<div class="col-4"></div>
     	</div>
@@ -75,18 +73,20 @@
 					@endif
 				</div>
 				<div class="form-group" >
-				    <label for="exampleInputEmail1" >Name</label>
+				    <label for="1" >Name</label>
 				    <input type="text" class=" form-control input--text" id="name" aria-describedby="emailHelp" placeholder="Your Name" value="<?php if(isset($values['user']['name'])){echo $values['user']['name'];} ?>" name="name">
 				    @if(session()->has('name'))
 					<span class="text-danger">{!! session('name')!!}</span>
 					@endif
 				</div>
+
 				<div class="form-group">
-				    <label for="exampleInputPassword1">Avatar</label>
+				    <label for="2">Avatar</label>
 				    <input type="file" class="input--file" id="photo"  name="avatar" >
 				</div>
+
 				<div class="form-group">
-				    <label for="exampleInputPassword1">Date Of Birth</label>
+				    <label for="3">Date Of Birth</label>
 				    <input type="text" class="form-control input--text" id="dateofbirth" value="<?php if(isset($values['imformation']['birth'])){echo $values['imformation']['birth'];}?>" name="birth">
 				    @if(session()->has('birth'))
 					<span class="text-danger">{!! session('birth')!!}</span>
@@ -94,7 +94,7 @@
 				</div>
 
 		        <div class="form-group">
-				    <label for="exampleInputPassword1">Gender</label>
+				    <label for="4">Gender</label>
 				    <div class="malecheck">
 					    Male<input id="gender1" name="gender" type="radio" class="form-check" value="1" <?php if(isset($values['imformation']['male'])){if($values['imformation']['male']==1){echo "checked";}} ?> >
 					    Female<input id="gender2" name="gender" type="radio" class="form-check" value= "2" <?php if(isset($values['imformation']['male'])){if($values['imformation']['male']==2){echo "checked";}} ?>>				    
@@ -105,7 +105,7 @@
 				</div>
 
 				<div class="form-group">
-				    <label for="exampleInputPassword1">Phone Number</label>
+				    <label for="5">Phone Number</label>
 				    <input type="text" class="form-control input--text" id="phone" value="<?php echo $values['imformation']['phone'] ;?>" name="phone">
 				    @if(session()->has('phone'))
 					<span class="text-danger">{!! session('phone')!!}</span>
@@ -113,7 +113,7 @@
 				</div>
 
 				<div class="form-group">
-				    <label for="exampleInputPassword1">Address</label>
+				    <label for="6">Address</label>
 				    <input type="text" class="form-control input--text" id="Address" value="<?php echo $values['imformation']['address'] ;?>" name="address">
 				    @if(session()->has('address'))
 					<span class="text-danger">{!! session('address')!!}</span>

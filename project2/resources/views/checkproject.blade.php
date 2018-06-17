@@ -4,7 +4,7 @@
 		<div class="row">
 			<div class="col-md-12 ">
 			<form class="form-horizontal">
-				<div class = "row"><legend class ="text-info" style="margin-left:10px;">Project Information</legend></div>
+				<div class = "row"><legend class ="text-info" style="margin-left:10px;">Thông tin chuyến công tác </legend></div>
 				
 			    <div class="form-group">
 			    	<div class="row">
@@ -58,7 +58,7 @@
 
 		<div class = "row">
 			<div class="col-md-12 ">
-			<legend class ="text-info">Describe</legend>
+			<legend class ="text-info">Mô tả </legend>
 			@if(isset($project))<p style="margin-left:20px;"><?php echo $project['describe']; ?></p>@endif
 			</div>
 		</div>
@@ -66,8 +66,8 @@
 		<div class="row">
 			<div class="col-md-12 ">
 			<form class="form-horizontal">
-				<legend class ="text-info">Plan</legend>
-				<p class="text-dark">This is plan of project. Employee sees and make a reasonable loan: </p>
+				<legend class ="text-info">Chi phí dự kiến </legend>
+				<p class="text-dark">Sau đây là chi tiết các khoản có thể đáp ứng cho chuyến công tác. Cán bộ có thể tạm ứng không vượt quá tổng số tiền đã duyệt : </p>
 				<div class="form-group">
 					<div class="row">	
 						<div class="col-md-2"></div>

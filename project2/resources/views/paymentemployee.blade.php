@@ -7,7 +7,7 @@
 	</style>
 	<div class="row">
 	<div class="col-md-12">
-	<legend class ="text-info" style ="text-align: left;">Show all payment of project</legend>
+	<legend class ="text-info" style ="text-align: left;">Lịch sử thanh toán </legend>
 	<form action="{{Route('findpayment',array($id))}}" method="get" accept-charset="utf-8">
 		<div class="form-group">
 			<div class="row">
@@ -44,16 +44,16 @@
 			<table class="table table-bordered table-striped">
 			    <thead>
 			      <tr>
-			        <th>Project</th>
-			        <th>Travel Cost</th>
-			        <th>Rent House</th>
-			        <th>Postage</th>
-			        <th>Postage Document</th>
-			        <th>Others</th>
-			        <th>Over Time</th>
-			        <th>Benifit</th>
-			        <th>Date Payment</th>
-			        <th>Total</th>
+			        <th class="text-info">Project</th>
+			        <th class="text-info">Travel </th>
+			        <th class="text-info">Rent </th>
+			        <th class="text-info">Postage</th>
+			        <th class="text-info">Document</th>
+			        <th class="text-info">Others</th>
+			        <th class="text-info">Over Time</th>
+			        <th class="text-info">Benifit</th>
+			        <th class="text-info">Date </th>
+			        <th class="text-info">Total</th>
 			      </tr>
 			    </thead>
 			    <tbody>

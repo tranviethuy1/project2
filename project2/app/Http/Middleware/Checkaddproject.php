@@ -20,13 +20,13 @@ class Checkaddproject
         $describe = $request->describe;
 
         if(empty($project_name)){
-            return redirect('admin')->with('name','Name project is empty');
+            return redirect('admin')->with('name','Tên chuyến công tác không được trống !!');
         }elseif(empty($date_start)){
-            return redirect('admin')->with('date','Date start is empty');
+            return redirect('admin')->with('date','Ngày thêm chuyến công tác không được  trống !! ');
         }elseif(empty($describe)){
-            return redirect('admin')->with('describe','Describe start is empty');
+            return redirect('admin')->with('describe','Mô tả chuyến công tác không được trống !!');
         }elseif(!preg_match("/^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/",$date_start)){
-            return redirect('admin')->with('date','Unvalid Date format yyyy-mm-dd');
+            return redirect('admin')->with('date','Không đúng định dạng ngày yyyy-mm-dd');
         }
         return $next($request);
     }

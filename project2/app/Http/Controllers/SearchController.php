@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Results;
 class SearchController extends Controller
 {
     public function quickSearchAdvance(Request $request){
@@ -289,8 +290,171 @@ class SearchController extends Controller
                } 
                return response($output);
             }    
-            
         }
     }
+
+    public function searchStatisticMonth(Request $request){
+        if($request->ajax()){
+            $month = $request->month;
+            $year = $request->year;
+            $output = "";
+            $results = array();
+            // $projects = Results::select('id_project')->where(DB::raw("(DATE_FORMAT(date_finish,'m'))"),$month)->distinct()->get();
+                if($month == "all"){
+                    $projects = Results::select('id_project')->whereYear('date_finish',$year)->distinct()->get();
+                    foreach ($projects as $key => $value) {
+                        $name = DB::table('projects')->where('id',$value->id_project)->value('name_project');
+                        $travel_cost = DB::table('results')->where('id_project',$value->id_project)->sum('travel_cost_r');
+                        $rent_house = DB::table('results')->where('id_project',$value->id_project)->sum('rent_house_r');
+                        $postage = DB::table('results')->where('id_project',$value->id_project)->sum('postage_r');
+                        $postage_document = DB::table('results')->where('id_project',$value->id_project)->sum('postage_document_r');
+                        $others = DB::table('results')->where('id_project',$value->id_project)->sum('others_r');
+                        $overtime = DB::table('results')->where('id_project',$value->id_project)->sum('overtime');
+                        $benifit = DB::table('results')->where('id_project',$value->id_project)->sum('benifit');
+                        
+                        $results[] = ['name'=> $name,'travel_cost_r'=>$travel_cost,'rent_house_r'=>$rent_house,'postage_r'=>$postage,'postage_document_r'=>$postage_document, 'others_r'=>$others, 'overtime'=>$overtime,'benifit'=>$benifit];
+                    }
+
+                    if(count($results)!= 0 ){
+                        foreach ($results as $result){
+                            $all=0;
+                            $all+=$result['travel_cost_r']+$result['rent_house_r']+$result['postage_r']+$result['postage_document_r']+$result['others_r']+$result['overtime']+$result['benifit'];
+                            $output.="
+                                <tr>
+                                    <td>".$result['name']."</td>
+                                    <td>".number_format($result['travel_cost_r'])."</td>
+                                    <td>".number_format($result['rent_house_r'])."</td>
+                                    <td>".number_format($result['postage_r'])."</td>
+                                    <td>".number_format($result['postage_document_r'])."</td>
+                                    <td>".number_format($result['others_r'])."</td>
+                                    <td>".number_format($result['overtime'])."</td>
+                                    <td>".number_format($result['benifit'])."</td>
+                                    <td>".number_format($all)." VNĐ"."</td>
+                                <tr>";
+                        }
+                        return response($output);
+                    }
+                    return response($output);                                        
+                }else{
+                $projects = Results::select('id_project')->whereMonth('date_finish',$month)->whereYear('date_finish',$year)->distinct()->get();            
+                foreach ($projects as $value){
+                    $name = DB::table('projects')->where('id',$value->id_project)->value('name_project');
+                    $travel_cost = DB::table('results')->where('id_project',$value->id_project)->sum('travel_cost_r');
+                    $rent_house = DB::table('results')->where('id_project',$value->id_project)->sum('rent_house_r');
+                    $postage = DB::table('results')->where('id_project',$value->id_project)->sum('postage_r');
+                    $postage_document = DB::table('results')->where('id_project',$value->id_project)->sum('postage_document_r');
+                    $others = DB::table('results')->where('id_project',$value->id_project)->sum('others_r');
+                    $overtime = DB::table('results')->where('id_project',$value->id_project)->sum('overtime');
+                    $benifit = DB::table('results')->where('id_project',$value->id_project)->sum('benifit');
+                    
+                    $results[] = ['name'=> $name,'travel_cost_r'=>$travel_cost,'rent_house_r'=>$rent_house,'postage_r'=>$postage,'postage_document_r'=>$postage_document, 'others_r'=>$others, 'overtime'=>$overtime,'benifit'=>$benifit];
+                }
+
+                if(count($results)!= 0 ){
+                    foreach ($results as $result){
+                        $all=0;
+                        $all+=$result['travel_cost_r']+$result['rent_house_r']+$result['postage_r']+$result['postage_document_r']+$result['others_r']+$result['overtime']+$result['benifit'];
+                        $output.="
+                            <tr>
+                                <td>".$result['name']."</td>
+                                <td>".number_format($result['travel_cost_r'])."</td>
+                                <td>".number_format($result['rent_house_r'])."</td>
+                                <td>".number_format($result['postage_r'])."</td>
+                                <td>".number_format($result['postage_document_r'])."</td>
+                                <td>".number_format($result['others_r'])."</td>
+                                <td>".number_format($result['overtime'])."</td>
+                                <td>".number_format($result['benifit'])."</td>
+                                <td>".number_format($all)." VNĐ"."</td>
+                            <tr>";
+                    }
+                    return response($output);
+                }
+                return response($output);
+            }
+        }    
+    }
+
+    public function searchStatisticYear(Request $request){
+        if($request->ajax()){
+            $month = $request->month;
+            $year = $request->year;
+            $output = "";
+            $results = array();
+            // $projects = Results::select('id_project')->where(DB::raw("(DATE_FORMAT(date_finish,'m'))"),$month)->distinct()->get();
+                if($month == "all"){
+                    $projects = Results::select('id_project')->whereYear('date_finish',$year)->distinct()->get();
+                    foreach ($projects as $key => $value) {
+                        $name = DB::table('projects')->where('id',$value->id_project)->value('name_project');
+                        $travel_cost = DB::table('results')->where('id_project',$value->id_project)->sum('travel_cost_r');
+                        $rent_house = DB::table('results')->where('id_project',$value->id_project)->sum('rent_house_r');
+                        $postage = DB::table('results')->where('id_project',$value->id_project)->sum('postage_r');
+                        $postage_document = DB::table('results')->where('id_project',$value->id_project)->sum('postage_document_r');
+                        $others = DB::table('results')->where('id_project',$value->id_project)->sum('others_r');
+                        $overtime = DB::table('results')->where('id_project',$value->id_project)->sum('overtime');
+                        $benifit = DB::table('results')->where('id_project',$value->id_project)->sum('benifit');
+                        
+                        $results[] = ['name'=> $name,'travel_cost_r'=>$travel_cost,'rent_house_r'=>$rent_house,'postage_r'=>$postage,'postage_document_r'=>$postage_document, 'others_r'=>$others, 'overtime'=>$overtime,'benifit'=>$benifit];
+                    }
+
+                    if(count($results)!= 0 ){
+                        foreach ($results as $result){
+                            $all=0;
+                            $all+=$result['travel_cost_r']+$result['rent_house_r']+$result['postage_r']+$result['postage_document_r']+$result['others_r']+$result['overtime']+$result['benifit'];
+                            $output.="
+                                <tr>
+                                    <td>".$result['name']."</td>
+                                    <td>".number_format($result['travel_cost_r'])."</td>
+                                    <td>".number_format($result['rent_house_r'])."</td>
+                                    <td>".number_format($result['postage_r'])."</td>
+                                    <td>".number_format($result['postage_document_r'])."</td>
+                                    <td>".number_format($result['others_r'])."</td>
+                                    <td>".number_format($result['overtime'])."</td>
+                                    <td>".number_format($result['benifit'])."</td>
+                                    <td>".number_format($all)." VNĐ"."</td>
+                                <tr>";
+                        }
+                        return response($output);
+                    }
+                    return response($output);                                        
+                }else{
+                $projects = Results::select('id_project')->whereMonth('date_finish',$month)->whereYear('date_finish',$year)->distinct()->get();            
+                foreach ($projects as $value){
+                    $name = DB::table('projects')->where('id',$value->id_project)->value('name_project');
+                    $travel_cost = DB::table('results')->where('id_project',$value->id_project)->sum('travel_cost_r');
+                    $rent_house = DB::table('results')->where('id_project',$value->id_project)->sum('rent_house_r');
+                    $postage = DB::table('results')->where('id_project',$value->id_project)->sum('postage_r');
+                    $postage_document = DB::table('results')->where('id_project',$value->id_project)->sum('postage_document_r');
+                    $others = DB::table('results')->where('id_project',$value->id_project)->sum('others_r');
+                    $overtime = DB::table('results')->where('id_project',$value->id_project)->sum('overtime');
+                    $benifit = DB::table('results')->where('id_project',$value->id_project)->sum('benifit');
+                    
+                    $results[] = ['name'=> $name,'travel_cost_r'=>$travel_cost,'rent_house_r'=>$rent_house,'postage_r'=>$postage,'postage_document_r'=>$postage_document, 'others_r'=>$others, 'overtime'=>$overtime,'benifit'=>$benifit];
+                }
+
+                if(count($results)!= 0 ){
+                    foreach ($results as $result){
+                        $all=0;
+                        $all+=$result['travel_cost_r']+$result['rent_house_r']+$result['postage_r']+$result['postage_document_r']+$result['others_r']+$result['overtime']+$result['benifit'];
+                        $output.="
+                            <tr>
+                                <td>".$result['name']."</td>
+                                <td>".number_format($result['travel_cost_r'])."</td>
+                                <td>".number_format($result['rent_house_r'])."</td>
+                                <td>".number_format($result['postage_r'])."</td>
+                                <td>".number_format($result['postage_document_r'])."</td>
+                                <td>".number_format($result['others_r'])."</td>
+                                <td>".number_format($result['overtime'])."</td>
+                                <td>".number_format($result['benifit'])."</td>
+                                <td>".number_format($all)." VNĐ"."</td>
+                            <tr>";
+                    }
+                    return response($output);
+                }
+                return response($output);
+            }
+        }    
+    }
+
+    
 
 }

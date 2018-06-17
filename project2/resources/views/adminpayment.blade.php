@@ -12,7 +12,7 @@
 		}
 	</style>
 	<div class ="row">
-		<div class ="col-md-5"><legend class ="text-info"> Imformation and plan of project</legend></div>	
+		<legend class ="text-info"> Thông tin chi tiết của dự án </legend>	
 	</div>
 
 	<div class="row">
@@ -60,7 +60,7 @@
 	</div>
 
 	<div class ="row">
-		<div class ="col-md-8"><legend class ="text-info">All Employee of project and advances of employee</legend></div>	
+		<legend class ="text-info">Cán bộ được giao nhiệm vụ và phiếu tạm ứng </legend>	
 	</div>
 
 	<div class="row" style="margin-left: 0px;">
@@ -90,14 +90,14 @@
 		<table class="table table-bordered table-striped">
 		    <thead>
 		      <tr>
-		        <th>Name</th>
-		        <th>Date advance</th>
-		        <th>Cost travel</th>
-		        <th>Rent house</th>
-				<th>Postage</th>
-				<th>Document</th>
-				<th>Others</th>	
-				<th>Total</th>
+		        <th class="text-info">Name</th>
+		        <th class="text-info">Date </th>
+		        <th class="text-info">Travel</th>
+		        <th class="text-info">Rent </th>
+				<th class="text-info">Postage</th>
+				<th class="text-info">Document</th>
+				<th class="text-info">Others</th>	
+				<th class="text-info">Total</th>
 				<th></th>	
 		      </tr>
 		    </thead>
@@ -115,7 +115,7 @@
 			        <td>{{number_format($advance->postage_document)}}</td>
 			        <td>{{number_format($advance->others)}}</td>
 			        <td>{{number_format($all).'VNĐ'}}</td>
-			        <td><a href="{{Route('printadvance',array($advance->id))}}" onclick="return Mesenger('Do you want to print advance ?')" id="print" class="btn btn-info">Print <i class="fas fa-print"></i></a></td>
+			        <td><a href="{{Route('printadvance',array($advance->id))}}" onclick="return Mesenger('Bạn có muốn in phiếu tạm ứng này không ?')" id="print" class="btn btn-info">Print <i class="fas fa-print"></i></a></td>
 			      </tr>
 			    @endforeach
 			@endif      
@@ -125,7 +125,7 @@
 
 
 	<div class ="row">
-		<div class ="col-md-8"><legend class ="text-info">Forms of payment</legend></div>	
+		<legend class ="text-info">Mẫu thanh toán </legend>	
 	</div>
 
 	<div class="row" style="margin-top: 20px;">
@@ -262,7 +262,7 @@
 				    	<div class="col-md-2">
 				    		<button type="submit" class="btn btn-success" style="width: 150px;"> Payment <i class="fas fa-plus-circle"></i></button>
 				    	</div>
-				    	<div class="col-md-4"><span class="text-danger" style="height: 38px;line-height: 38px;">Lưu ý :(section(*) cant be empty )</span></div>
+				    	<div class="col-md-4"><span class="text-danger" style="height: 38px;line-height: 38px;"> Chú ý * thông tin bắt buộc </span></div>
 				    </div>								
 				</div>
 
@@ -290,22 +290,23 @@
 	</div>
 
 	<div class ="row">
-		<div class ="col-md-8"><legend class ="text-info">History of payment</legend></div>	
+		<legend class ="text-info">Lịch sử thanh toán </legend>
 	</div>
 
 	<div class ="row">	
 		<table class="table table-bordered table-striped">
 		    <thead>
 		      <tr>
-		        <th>Name</th>
-		        <th>Date</th>
-		        <th>Traveling</th>
-		        <th>Rent house</th>
-				<th>Postage</th>
-				<th>Document</th>
-				<th>Others</th>	
-				<th>Overtime</th>	
-				<th>Benifit</th>
+		        <th class="text-info">Name</th>
+		        <th class="text-info">Date</th>
+		        <th class="text-info">Travel</th>
+		        <th class="text-info">Rent</th>
+				<th class="text-info">Postage</th>
+				<th class="text-info">Document</th>
+				<th class="text-info">Others</th>	
+				<th class="text-info">Overtime</th>	
+				<th class="text-info">Benifit</th>
+				<th class="text-info">Total</th>
 				<th></th>
 		      </tr>
 		    </thead>
@@ -322,9 +323,10 @@
 			        <td>{{number_format($result->others_r)}}</td>
 			        <td>{{number_format($result->overtime)}}</td>
 			        <td>{{number_format($result->benifit)}}</td>
+			        <td>{{number_format($result->travel_cost_r+$result->rent_house_r+$result->postage_r+$result->postage_document_r+$result->others_r+$result->overtime+$result->benifit)}}</td>
 			        <td>
-			        	<a href="{{Route('deletepayment',array($project->id,$result->id))}}" onclick="return Mesenger('Do you want to delete this payment?')" class="btn btn-info" style="width:100px;">Delete <i class="fas fa-trash-alt"></i></a>
-				        <a href="{{Route('printresult',array($result->id))}}" onclick="return Mesenger('Do you want to print result ?')" id="print" class="btn btn-secondary" style="width:100px; margin-top: 10px;">Print <i class="fas fa-print"></i></a>
+			        	<a href="{{Route('deletepayment',array($project->id,$result->id))}}" onclick="return Mesenger('Bạn có muốn xóa phiếu thanh toán này không ?')" class="btn btn-info" style="width:100px;">Delete <i class="fas fa-trash-alt"></i></a>
+				        <a href="{{Route('printresult',array($result->id))}}" onclick="return Mesenger('Bạn có muốn in phiếu thanh toán này không ?')" id="print" class="btn btn-secondary" style="width:100px; margin-top: 10px;">Print <i class="fas fa-print"></i></a>
 			        </td>
 			      </tr>
 			    @endforeach
@@ -336,7 +338,7 @@
 	<div class="row">
 		<div class ="col-md-7"></div>
 		<div class ="col-md-5">
-			<a href="{{Route('finishproject',array($project->id))}}" onclick="return Mesenger('Do you want to finish project?')" class="btn btn-success" style="width: 150px;">Finish Project <i class="fas fa-thumbs-up"></i></a>
+			<a href="{{Route('finishproject',array($project->id))}}" onclick="return Mesenger('Bạn có muốn kết thúc chuyến công tác này không ?')" class="btn btn-success" style="width: 150px;">Finish Project <i class="fas fa-thumbs-up"></i></a>
             <a href="{{Route('admin')}}" class="btn btn-danger" ><span class="glyphicon glyphicon-remove-sign"></span>Back to Home <i class="fas fa-arrow-alt-circle-left"></i></a>
 		</div>
 	</div>

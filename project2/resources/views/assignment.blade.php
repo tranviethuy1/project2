@@ -6,7 +6,7 @@
 	$name = session('data')['name'];
 	?>
 	<div class ="row">
-		<div class ="col-md-3"><legend class ="text-info" >Add Assignment</legend></div>	
+		<legend class ="text-info" >Giao nhiệm vụ </legend>	
 	</div>
 
 	<div class ="row">
@@ -55,8 +55,8 @@
 	<div class="row">
     	<div class="col-md-3"></div>
     	<div class="col-md-9">
-    		<a href="{{Route('updateAssignment',array($project->id))}}" class="btn btn-success"> Fix Assignment</a>
-    		<a href="{{Route('admin')}}" class="btn btn-primary"> Back to Home</a>
+    		<a href="{{Route('updateAssignment',array($project->id))}}" class="btn btn-success"> Fix Assignment <i class="fas fa-briefcase"></i></a>
+    		<a href="{{Route('admin')}}" class="btn btn-primary"> Back to Home <i class="fas fa-arrow-circle-right"></i></a>
     	</div>
     </div>
 @else
@@ -93,7 +93,7 @@
 			<div class="form-group">
 		    	<div class="row">
 		    		<div class="col-md-1"></div>
-			    	<div class="control-labe col-md-2">Name of employees</div>
+			    	<div class="control-labe col-md-2">Name of employees:</div>
 			      	<div class="col-md-4" id="show">
 
 			     	</div>
@@ -103,8 +103,8 @@
 		    <div class="row">
 		    	<div class="col-md-3"></div>
 		    	<div class="col-md-9">
-		    		<button type ="submit" class="btn btn-success"> Assignment</button>
-		    		<a href="{{Route('admin')}}" class="btn btn-primary"> Cancel</a>
+		    		<button type ="submit" class="btn btn-success"> Assignment <i class="fas fa-bell"></i></button>
+		    		<a href="{{Route('admin')}}" class="btn btn-primary"> Cancel <i class="fas fa-ban"></i></a>
 		    	</div>
 		    </div>
 

@@ -34,7 +34,7 @@ class LoginController extends Controller
             }
 
     	}else{
-    		return redirect('/')->with('error','User is not exist');
+    		return redirect('/')->with('error','Tài khoản này không tồn tại !!');
     	}
     }
 
@@ -58,7 +58,7 @@ class LoginController extends Controller
             }
             session()->forget('links');
             $projects = \App\Projects::where('status',1)->orWhere('status',2)->paginate(5);
-            return view('admin')->with(['projects'=>$projects,'alert'=>'Data is restored']);
+            return view('admin')->with(['projects'=>$projects,'alert'=>'Dữ liệu được khôi phục !!']);
         }
     }
 }

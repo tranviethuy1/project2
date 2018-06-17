@@ -26,7 +26,7 @@
 	<!-- js -->
 	<script src="{!! asset('js/status_information.js')!!}"></script>
 	<script src="{!! asset('ckeditor/ckeditor.js')!!}"" type="text/javascript" language="javascript"></script>
-
+	
 </head>
 <body>
 	<?php 
@@ -90,6 +90,8 @@
 			    <div class="panel-body"><li><i class="fas fa-envelope-open"></i><a href="{{Route('adminnotice')}}" class="title">Add Notice</a></li></div>
 			    <div class="panel-body"><li><i class="fas fa-user-secret"></i><a href="{{Route('showuser')}}" class="title">User </a></li></div>
 			    <div class="panel-body"><li><i class="fas fa-book"></i><a href="{{Route('projectmanager')}}" class="title">Project </a></li></div>
+			    <div class="panel-body"><li><i class="fas fa-chart-bar"></i><a href="{{Route('statistic')}}" class="title">Statistic </a></li></div>
+			    <div class="panel-body"><li><i class="fas fa-file"></i><a href="{{Route('admintemplate')}}" class="title">Add Template</a></li></div>
 			    <div class="panel-body">
 				    <ul class="navbar-nav advance">	
 				    	<li class="nav-item dropdown">
@@ -101,7 +103,6 @@
 				    	</li>
 				    </ul>	
 			    </div>
-			    <div class="panel-body"><li><i class="fas fa-file"></i><a href="{{Route('admintemplate')}}" class="title">Add Template</a></li></div>
 		    </div>
 		</div>
 		 <!-- extends -->

@@ -7,8 +7,8 @@
 	}
 </style>
 	
-	<div class="row"><legend class ="text-info" style ="text-align: left;">List all project finish </legend></div>
-	<form action="{{Route('finduser')}}" method="post" accept-charset="utf-8">
+	<div class="row"><legend class ="text-info" style ="text-align: left;">Danh sách các chuyến công tác kết thúc </legend></div>
+	<form action="{{Route('findproject')}}" method="post" accept-charset="utf-8">
 		<div class="form-group">
 			<div class="row">
 				<div class="col-md-5" >
@@ -50,7 +50,7 @@
 		    <thead>
 		      <tr>
 		        <th class="text-info">ID</th>
-		        <th class="text-info">Project Information</th>
+		        <th class="text-info">Informations</th>
 		        <th class="text-info">Plans</th>
 		        <th class="text-info">Employees</th>
 		        <th class="text-info">Payments</th>
@@ -81,7 +81,7 @@
 			        		<li>Overtime: {{number_format($data_project[$i][$project->id]['plans']->overtime)." VNĐ"}}</li>
 			        		<li>Benifit: {{number_format($data_project[$i][$project->id]['plans']->benifit)." VNĐ"}}</li>
 			        		<hr>
-			        		<li class="text-info">Total: {{number_format($data_project[$i][$project->id]['plans']->benifit+$data_project[$i][$project->id]['plans']->overtime+$data_project[$i][$project->id]['plans']->others+$data_project[$i][$project->id]['plans']->postage_document+$data_project[$i][$project->id]['plans']->postage+$data_project[$i][$project->id]['plans']->rent_house+$data_project[$i][$project->id]['plans']->travel_cost)." VNĐ"}}</li>
+			        		<li style="color:#007fff;">Total: {{number_format($data_project[$i][$project->id]['plans']->benifit+$data_project[$i][$project->id]['plans']->overtime+$data_project[$i][$project->id]['plans']->others+$data_project[$i][$project->id]['plans']->postage_document+$data_project[$i][$project->id]['plans']->postage+$data_project[$i][$project->id]['plans']->rent_house+$data_project[$i][$project->id]['plans']->travel_cost)." VNĐ"}}</li>
 			        	</ul>
 			        </td>
 			        <td>
@@ -121,7 +121,7 @@
 			        	</ul>
 			        </td>
 			        <td>
-			        	<a href="{{Route('printpayment',array($project->id))}}" onclick="return ResetMesenger('Do you want to print ?')" id="print" class="btn btn-info">Print <i class="fas fa-print"></i></a>
+			        	<a href="{{Route('printpayment',array($project->id))}}" onclick="return sendMessage('Bạn có muốn in phiếu thanh toán này không?')" id="print" class="btn btn-info">Print <i class="fas fa-print"></i></a>
 			        </td>
 		      	</tr>
 				<?php $i =$i+1; ?>

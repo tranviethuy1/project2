@@ -16,7 +16,7 @@
 		margin: auto;
 	}
 	</style>
-	<div class="row"><legend class ="text-info" style = "font-family:Antiqua; margin-left: 10px;">Template</legend></div>
+	<div class="row"><legend class ="text-info" style = "font-family:Antiqua; margin-left: 10px;">Mẫu đơn </legend></div>
 	@foreach($lists as $list)
 		<div class="row" style="margin-top:12px; "><h4 class ="text-info" style ="font-family:Antiqua ;font-size: 18px; margin-left:20px;"><a href="{{asset($list->linkdownload)}}">{{$list->title}} <i class="fas fa-download"></i></a></h4></div>
 		<div class ="time"><h6 class="timeupdate">{{$list->create_at}}</h6></div>

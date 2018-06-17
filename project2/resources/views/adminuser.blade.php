@@ -12,7 +12,7 @@
 	}
 </style>
 	
-	<div class="row"><legend class ="text-info" style ="text-align: left;">Show all Employee</legend></div>
+	<div class="row"><legend class ="text-info" style ="text-align: left;">Danh sách cán bộ </legend></div>
 	<form action="{{Route('finduser')}}" method="post" accept-charset="utf-8">
 		<div class="form-group">
 			<div class="row">
@@ -55,15 +55,15 @@
 			<table class="table table-bordered table-striped">
 			    <thead>
 			      <tr>
-			        <th>ID</th>
-			        <th>Avatar</th>
-			        <th>Name</th>
-			        <th>Email</th>
-			        <th>Posision</th>
-			        <th>Male</th>
-			        <th>Birth</th>
-			        <th>Address</th>
-			        <th>Phone</th>
+			        <th class="text-info">ID</th>
+			        <th class="text-info">Avatar</th>
+			        <th class="text-info">Name</th>
+			        <th class="text-info">Email</th>
+			        <th class="text-info">Posision</th>
+			        <th class="text-info">Male</th>
+			        <th class="text-info">Birth</th>
+			        <th class="text-info">Address</th>
+			        <th class="text-info">Phone</th>
 			        <th></th>
 			      </tr>
 			    </thead>
@@ -88,7 +88,7 @@
 				        <td>{{$imformation->address}}</td>
 				        <td>{{$imformation->phone}}</td>
 				        <td>
-				        	<a href="{{Route('resetpassword',array($user->id))}}" onclick="return ResetMesenger('Do you want to reset password?')" class="btn btn-info">Reset <i class="fas fa-database"></i></a>
+				        	<a href="{{Route('resetpassword',array($user->id))}}" onclick="return ResetMesenger('Bạn có muốn reset mật khẩu của tài khoản này không?')" class="btn btn-info">Reset <i class="fas fa-database"></i></a>
 				        </td>
 			      	</tr>
 			    @endforeach

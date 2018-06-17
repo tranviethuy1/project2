@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use DB;
 
 class Checkbeforeupdate
 {
@@ -23,36 +24,51 @@ class Checkbeforeupdate
         $birth = $request->input('birth');
         $phone = $request->input('phone');
 
+        $users = DB::table('users')->get();
+        $oldname = DB::table('users')->where('id',$id)->value('name');
+        $oldemail = DB::table('users')->where('id',$id)->value('email');
+
+        foreach($users as $user){
+            if($name != $oldname && $name == $user->name){
+                $error = "Tên này đã được sử dụng !! ";
+                return  redirect()->Route('back2updateprofile',array($id,$error))->with('name','Tên này đã được sử dụng !! ');
+            }
+            if($email != $oldemail && $email == $user->email){
+                $error = "Email này đã được sử dụng !! ";
+                return  redirect()->Route('back2updateprofile',array($id,$error))->with('email','Email này đã được sử dụng !! ');
+            }
+        }
+ 
         if(empty($name)){
-            $error = "It is not enough data";
-            return  redirect()->Route('back2updateprofile',array($id,$error))->with('name','Name is empty');
+            $error = "Bạn chưa nhập đầy đủ dữ liệu !!";
+            return  redirect()->Route('back2updateprofile',array($id,$error))->with('name','Tên không được để trống !!');
         }elseif(empty($email)){
-            $error = "It is not enough data";
-            return  redirect()->Route('back2updateprofile',array($id,$error))->with('email','Email is empty');
+            $error = "Bạn chưa nhập đầy đủ dữ liệu !!";
+            return  redirect()->Route('back2updateprofile',array($id,$error))->with('email','Email không được để trống !!');
         }elseif(empty($gender)){
-            $error = "It is not enough data";
-            return  redirect()->Route('back2updateprofile',array($id,$error))->with('gender','Gender is empty');
+            $error = "Bạn chưa nhập đầy đủ dữ liệu !!";
+            return  redirect()->Route('back2updateprofile',array($id,$error))->with('gender','Giới tính không được để trống !!');
         }elseif(empty($address)){
-            $error = "It is not enough data";
-            return  redirect()->Route('back2updateprofile',array($id,$error))->with('address','Address is empty');
+            $error = "Bạn chưa nhập đầy đủ dữ liệu !!";
+            return  redirect()->Route('back2updateprofile',array($id,$error))->with('address','Địa chỉ không được để trống !!');
         }elseif(empty($phone)){
-            $error = "It is not enough data";
-            return  redirect()->Route('back2updateprofile',array($id,$error))->with('phone','Phone is empty');
+            $error = "Bạn chưa nhập đầy đủ dữ liệu !!";
+            return  redirect()->Route('back2updateprofile',array($id,$error))->with('phone','Số điện thoại không được để trống !!');
         }elseif(empty($birth)){
-            $error = "It is not enough data";
-            return  redirect()->Route('back2updateprofile',array($id,$error))->with('birth','Birth is empty');
+            $error = "Bạn chưa nhập đầy đủ dữ liệu !!";
+            return  redirect()->Route('back2updateprofile',array($id,$error))->with('birth','Ngày sinh không được để trống !! ');
         }elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $error = "Invalid email format";
-            return redirect()->Route('back2updateprofile',array($id,$error))->with('email','Invalid email format');
+            $error = "Không đúng định dạng email!! ";
+            return redirect()->Route('back2updateprofile',array($id,$error))->with('email','Không đúng định dạng email !!');
         }elseif(!preg_match("/^[0-9]{10}$/", $phone) && !preg_match("/^[0-9]{11}$/", $phone)){
-            $error = "Invalid phone format";
-            return redirect()->Route('back2updateprofile',array($id,$error))->with('phone','Invalid phone format 10-11 number');
+            $error = "Không đúng định dạng số điện thoại !!";
+            return redirect()->Route('back2updateprofile',array($id,$error))->with('phone','Không đúng định dạng số điện thoại !! 10-11 số');
         }elseif(!preg_match("/^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/",$birth)){
-            $error = "Invalid date format";
-            return redirect()->Route('back2updateprofile',array($id,$error))->with('phone','Invalid birth format yyyy-mm-dd');
+            $error = "Không đúng định dạng ngày !!";
+            return redirect()->Route('back2updateprofile',array($id,$error))->with('phone','Không đúng định dạng ngày yyyy-mm-dd');
         }elseif($gender != 1 && $gender != 2){
-            $error = "Gener is Male or FeMale";
-            return redirect()->Route('back2updateprofile',array($id,$error))->with('gender','Gener is Male or FeMale');
+            $error = "Lựa chọn Male hoặc Female !! ";
+            return redirect()->Route('back2updateprofile',array($id,$error))->with('gender','Lựa chọn Male hoặc Female !! ');
         }
         return $next($request); 
     }

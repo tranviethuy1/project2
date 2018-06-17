@@ -6,7 +6,7 @@
 		}	
 	</style>
 
-	<legend class ="text-info" style ="text-align: left;">Show all your advance</legend>
+	<legend class ="text-info" style ="text-align: left;">Lịch sử tạm ứng </legend>
 	<form action="{{Route('findadvance',array($id))}}" method="get" accept-charset="utf-8">
 		<div class="form-group">
 			<div class="row">
@@ -40,14 +40,14 @@
 			<table class="table table-bordered table-striped">
 			    <thead>
 			      <tr>
-			        <th>Project</th>
-			        <th>Advance_Date</th>
-			        <th>Travel_Cost</th>
-			        <th>Rent_House</th>
-			        <th>Postage</th>
-			        <th>Postage_Document</th>
-			        <th>Others</th>
-			        <th>Total</th>
+			        <th class="text-info">Project</th>
+			        <th class="text-info">Date</th>
+			        <th class="text-info">Travel</th>
+			        <th class="text-info">Rent</th>
+			        <th class="text-info">Postage</th>
+			        <th class="text-info">Document</th>
+			        <th class="text-info">Others</th>
+			        <th class="text-info">Total</th>
 			      </tr>
 			    </thead>
 			    <tbody>

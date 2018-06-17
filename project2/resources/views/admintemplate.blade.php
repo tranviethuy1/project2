@@ -13,7 +13,7 @@
 		};
 	</script>
 	<div class="row">
-		<div class ="col-md-3"><legend class ="text-info">Add Template</legend></div>
+		<legend class ="text-info">Thêm mẫu đơn </legend>
 	</div>
 
 	<div class="row">
@@ -23,7 +23,7 @@
 			    <div class="form-group">
 			    	<div class="row">
 				    	<div class="col-md-1"></div>
-				     	<label class="control-label col-md-1" for="t">Title:</label>
+				     	<label class="control-label col-md-1" for="t">Title*:</label>
 				      	<div class="col-md-4">
 				        	<input type="text" class="form-control" id="title" name="title">
 				        	@if(session()->has('title'))
@@ -37,7 +37,7 @@
 			    <div class="form-group">
 			    	<div class="row">
 				    	<div class="col-md-1"></div>
-				     	<label class="control-label col-md-1" for="t">File:</label>
+				     	<label class="control-label col-md-1" for="t">File*:</label>
 				      	<div class="col-md-4">
 				        	<input type="file" class="form-control" id="file" name="file_template">
 				        	@if(session()->has('file'))
@@ -51,8 +51,9 @@
 				<div class="form-group">
 					<div class="row">
 				    	<div class="col-md-2"></div>
-				    	<div class="col-md-4">
-				    		<button type="submit" class="btn btn-success" onclick="return sendAlert('Make sure Your file is .doc .docx .pdf .ppt .pptx .xls or .xlsx!!')"> Add template <i class="fas fa-download"></i></i></button>
+				    	<div class="col-md-5">
+				    		<button type="submit" class="btn btn-success" onclick="return sendAlert('Chắc chắn rằng file có định dạng : .doc .docx .pdf .ppt .pptx .xls or .xlsx!!')"> Add template <i class="fas fa-download"></i></i></button>
+				    		<span class="text-danger"> Chú ý * thông tin bắt buộc</span>
 				    	</div>
 				    </div>								
 				</div>
@@ -61,13 +62,13 @@
 	</div>
 
 	<div class = "row" style="margin-top:50px; padding: 0px;">
-		<legend class="text-info">All Template</legend>
+		<legend class="text-info">Danh sách mẫu đơn </legend>
 		<table class="table table-bordered table-hover table-striped">
 		    <thead>
 		      <tr>
-		        <th>ID </th>
-		        <th>Title</th>
-		        <th>Last update</th>
+		        <th class="text-info">ID </th>
+		        <th class="text-info">Title</th>
+		        <th class="text-info">Last update</th>
 		        <th></th>
 		      </tr>
 		    </thead>
@@ -80,7 +81,7 @@
 			        <td>{{$template->create_at}}</td>
 			        <td>
 			        	<a href="{{Route('updatetemplate',array($template->id))}}" class="btn btn-secondary">Update <i class="fas fa-edit"></i></a>
-			        	<a href="{{Route('deletetemplate',array($template->id))}}" onclick="return sendAlert('Do you want to delete this notice?')" class="btn btn-info">Delete <i class="fas fa-trash-alt"></i></a>
+			        	<a href="{{Route('deletetemplate',array($template->id))}}" onclick="return sendAlert('Bạn có muốn xóa mẫu đơn này không ?')" class="btn btn-info">Delete <i class="fas fa-trash-alt"></i></a>
 			        </td>
 			    </tr>
 			    @endforeach

@@ -18,7 +18,7 @@
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('vendor/select2/select2.min.css')}}">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('css/util.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{URL::asset('css/main.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{URL::asset('css/main.css')}}"> 
 <!--===============================================================================================-->
 </head>
 <body>
@@ -28,15 +28,16 @@
 				<div class="login100-pic js-tilt" data-tilt>
 					<img class="image" src="{{URL::asset('images/login.jpg')}}" alt="IMG">
 					<p class= "text-info admin">Ứng dụng quản lý công tác phí </p>
-					<p class= "text-info admin">Teacher:Dr. Vũ Thị Hương Giang </p>
-					<p class= "text-info admin">Make by:Trần Viết Huy</p>
-					<p class= "text-info admin">Student number:20151716</p>
+					<p class= "text-info admin">Teacher: Dr. Vũ Thị Hương Giang </p>
+					<p class= "text-info admin">Sinh viên thực hiện:</p>
+					<p class= "text-info admin"> Trần Viết Huy Mssv: 20151716</p>
+					<p class= "text-info admin"> Trần Văn Hiệp Mssv: 20151444</p>
 				</div>
 
 				<form class="login100-form validate-form" action="{{route('login')}}" method="post">
 					{!! csrf_field() !!}
 					<span class="login100-form-title">
-						<p class="text-info welcome">Welcome to application</p>
+						<p class="text-info welcome">Chào mừng đến với ứng dụng</p>
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">

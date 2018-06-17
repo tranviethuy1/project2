@@ -15,16 +15,16 @@ class Checkaddtemplates
      */
     public function handle($request, Closure $next)
     {
-       $title = $request->title;
+       $title = $request->title; 
         if(empty($title)){
-            return redirect('admintemplate')->with('title','Title is empty');
+            return redirect('admintemplate')->with('title','Tiêu đề không được trống !!');
         }
         elseif(!$request->hasFile('file_template')){
-            return redirect('admintemplate')->with('file','File is empty');
+            return redirect('admintemplate')->with('file','File không được trống !!');
         }elseif($request->hasFile('file_template')){
             $file = $request->file('file_template');
             if(!in_array($file->getClientOriginalExtension(),['docx','pdf','ppt','doc','docx','ppt','pptx','xls','xlsx'])){
-                return redirect('admintemplate')->with('file','File is unvalid format');
+                return redirect('admintemplate')->with('file','Không đúng định dạng file !!');
             }
         }
         return $next($request);

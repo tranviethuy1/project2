@@ -5,7 +5,7 @@
 		$name = session('data')['name'];
 	?>
 	<div class="row">
-		<div class ="col-md-3"><legend class ="text-info">Update Notice</legend></div>
+		<legend class ="text-info">Cập nhật thông báo</legend>
 	</div>
 	<div class="row">
 		<div class="col-md-12">	
@@ -14,7 +14,7 @@
 			    <div class="form-group">
 			    	<div class="row">
 				    	<div class="col-md-1"></div>
-				     	<label class="control-label col-md-1" for="t">Title:</label>
+				     	<label class="control-label col-md-1" for="t">Title*:</label>
 				      	<div class="col-md-4">
 				        	<input type="text" class="form-control" id="title" value="{{$notice->title}}" name="title">
 				        	@if(session()->has('title'))
@@ -28,7 +28,7 @@
 			    <div class="form-group">
 				    <div class="row">
 				    	<div class="col-md-1"></div>
-				      	<label class="control-label col-md-1" for="f">Content:</label>
+				      	<label class="control-label col-md-1" for="f">Content*:</label>
 				      	<div class="col-md-6">          
 				        	<textarea rows="4" cols="50" id="content" class="ckeditor" name="content">{{$notice->content}}</textarea>
 				        	@if(session()->has('content'))
@@ -49,7 +49,16 @@
 							<span class="text-danger">{!! session('file')!!}</span>
 							@endif	
 				     	</div>
-				     	<div class="col-md-5"><span class="text-info">(** File of Notice (can NULL) **)</span></div>
+				     	<div class="col-md-5"></div>
+				    </div>	
+			    </div>
+
+			    <div class="form-group">
+			    	<div class="row">
+				    	<div class="col-md-2"></div>
+						<div class="col-md-4">
+							<span class="text-danger"> Chú ý * thông tin bắt buộc</span>
+						</div>
 				    </div>	
 			    </div>
 
@@ -57,7 +66,7 @@
 					<div class="row">
 				    	<div class="col-md-2"></div>
 				    	<div class="col-md-4">
-				    		<button type="submit" onclick="return sendAlert('Make sure you enter enough information!!')" class="btn btn-success"> Update Notice <i class="fas fa-edit"></i></button>
+				    		<button type="submit" onclick="return sendAlert('Chắc chắn rằng bạn đã nhập đầy đủ thông tin !!')" class="btn btn-success"> Update Notice <i class="fas fa-edit"></i></button>
 				    		<a href="{{Route('adminnotice')}}" class="btn btn-danger">Cancel <i class="fas fa-times-circle"></i></a>
 				    	</div>
 				    </div>								

@@ -22,16 +22,16 @@ class Checkrefuse
         $advances = DB::table('advances')->where('id_project',$id_project)->get();
 
         if(count($advances) == 0){
-            return redirect()->Route('seeadvance',array($id_project))->with('alert','Cant refuse because No advance in this project');
+            return redirect()->Route('seeadvance',array($id_project))->with('alert','Không có phiếu vay tạm ứng trong chuyến công tác này !!');
         }   
 
         if(empty($reason)){
-            return redirect()->Route('seeadvance',array($id_project))->with('alert','Cant refuse when reason is empty');
+            return redirect()->Route('seeadvance',array($id_project))->with('alert','Nhập lý do từ chối !! ');
         }
 
         switch($number_employee) {
             case 0:
-                    return redirect()->Route('seeadvance',array($id_project))->with('alert','Choose employee');
+                    return redirect()->Route('seeadvance',array($id_project))->with('alert','Chọn cán bộ của chuyến công tác !!');
                 break;
             case 1:
                 break;
@@ -39,7 +39,7 @@ class Checkrefuse
                 $name1 = $request->employee_name1;
                 $name2 = $request->employee_name2;
                 if($name1 == $name2){
-                    return redirect()->Route('seeadvance',array($id_project))->with('alert','Can not select the same name');
+                    return redirect()->Route('seeadvance',array($id_project))->with('alert','Không được chọn cán bộ tên giống nhau !!');
                 }
                 break;
             case 3:
@@ -47,7 +47,7 @@ class Checkrefuse
                 $name2 = $request->employee_name2;
                 $name3 = $request->employee_name3;
                 if($name1 == $name2 || $name2 = $name3 || $name3 = $name1){
-                    return redirect()->Route('seeadvance',array($id_project))->with('alert','Can not select the same name');
+                    return redirect()->Route('seeadvance',array($id_project))->with('alert','Không được chọn cán bộ tên giống nhau !!');
                 }
                 break;
 
@@ -57,7 +57,7 @@ class Checkrefuse
                 $name3 = $request->employee_name3;
                 $name4 = $request->employee_name4;
                 if($name1 == $name2 || $name2 = $name3 || $name3 = $name4 || $name4 = $name1 || $name3 = $name1 || $name2 = $name4){
-                    return redirect()->Route('seeadvance',array($id_project))->with('alert','Can not select the same name');
+                    return redirect()->Route('seeadvance',array($id_project))->with('alert','Không được chọn cán bộ tên giống nhau !!');
                 } 
                 break;                                                                                               
             case 5:
@@ -67,7 +67,7 @@ class Checkrefuse
                 $name4 = $request->employee_name4;
                 $name5 = $request->employee_name5;
                 if($name1 == $name2 || $name2 = $name3 || $name3 = $name4 || $name4 = $name1 || $name3 = $name1 || $name2 = $name4 || $name4 = $name5 || $name1 = $name5 || $name2 = $name5 || $name3 = $name5){
-                    return redirect()->Route('seeadvance',array($id_project))->with('alert','Can not select the same name');
+                    return redirect()->Route('seeadvance',array($id_project))->with('alert','Không được chọn cán bộ tên giống nhau !!');
                 } 
                 break;     
         }

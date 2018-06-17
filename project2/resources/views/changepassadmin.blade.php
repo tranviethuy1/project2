@@ -45,7 +45,7 @@
             <span class="alert alert-danger form-control span" style="padding: 0px;">{!! $alert !!}</span>
               @endif
           </div>
-          <fieldset><legend style ="text-align: center ; font-family:Poppins-Regular;">Change Pasword</legend><hr></fieldset>
+          <fieldset><legend style ="text-align: center ; font-family:Poppins-Regular;">ĐỔI MẬT KHẨU</legend><hr></fieldset>
            <!-- input -->
            <div class="form-group">
             <div class="row">

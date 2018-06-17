@@ -47,7 +47,7 @@
 					</div>
 
 	               	<div class="panel-title text-center">
-	               		<h1 class="title">Create Account</h1>
+	               		<h1 class="title">Tạo tài khoản</h1>
 	               		<hr />
 	               	</div>
 	            </div> 
@@ -58,7 +58,7 @@
 							<label for="name" class="cols-sm-2 control-label">Your Name</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+									<span class="input-group-addon"><i class="fas fa-user"></i></span>
 									<input type="text" class="form-control" name="name" id="name" placeholder="Enter your Name"/>
 								</div>
 								@if(session()->has('name'))
@@ -71,7 +71,7 @@
 							<label for="email" class="cols-sm-2 control-label">Your Email</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+									<span class="input-group-addon"><i class="fas fa-envelope"></i></span>
 									<input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>								
 								</div>
 								@if(session()->has('email'))
@@ -84,7 +84,7 @@
 							<label for="password" class="cols-sm-2 control-label">Password</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+									<span class="input-group-addon"><i class="fas fa-unlock"></i></span>
 									<input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
 								</div>
 								@if(session()->has('pass'))
@@ -97,7 +97,7 @@
 							<label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+									<span class="input-group-addon"><i class="fas fa-unlock"></i></span>
 									<input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password"/>
 								</div>
 								@if(session()->has('confirm'))
@@ -109,12 +109,12 @@
 						<div class="form-group">
 							<label for="male" class="cols-sm-2 control-label">Gender</label>
 							<div class="cols-sm-10">
-								<div class="input-group ">
-									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fas fa-transgender"></i></span>
 									<label for = "male" class = "space"></label>
-									<label for="male" class="cols-sm-2 control-label">Male</label><input type="radio" class="left-male" name="male" id="male1" value="1" />
+									<label for="male" class="cols-sm-2 control-label">Male</label><input type="radio" class="left-male" name="male" id="male1" value="1" style="margin-left:2px; " />
 									<label for = "male" class = "space"></label>
-									<label for="male" class="cols-sm-2 control-label">Female</label><input type="radio" class="right-male" name="male" id="male2" value="2" />
+									<label for="male" class="cols-sm-2 control-label">Female</label><input type="radio" class="right-male" name="male" id="male2" value="2" style="margin-left:2px; " />
 								</div>
 								@if(session()->has('male'))
 								<span class="text-danger">{!! session('male')!!}</span>
@@ -126,7 +126,7 @@
 							<label for="address" class="cols-sm-2 control-label">Address</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+									<span class="input-group-addon"><i class="fas fa-address-book"></i></span>
 									<input type="text" class="form-control" name="address" id="address"  placeholder="Enter your Address"/>
 								</div>
 								@if(session()->has('address'))
@@ -139,7 +139,7 @@
 							<label for="birth" class="cols-sm-2 control-label">Birth</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+									<span class="input-group-addon"><i class="fas fa-birthday-cake"></i></span>
 									<input type="text" class="form-control" name="birth" id="birth"  placeholder="yyyy-mm-dd"/>
 								</div>
 								@if(session()->has('birth'))
@@ -152,7 +152,7 @@
 							<label for="phone" class="cols-sm-2 control-label">Phone</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+									<span class="input-group-addon"><i class="fas fa-phone"></i></span>
 									<input type="text" class="form-control" name="phone" id="phone"  placeholder="Phone Number"/>
 								</div>
 								@if(session()->has('phone'))

@@ -19,21 +19,22 @@ class Checkchangepassadmin
         $id = $request->id;
         $pass = $request->pass;
         $newpass = $request->newpass;
-        $confirmpass = $request->confirmpass;
+        $confirmpass = $request->confirmpass; 
+        
         $user = DB::table('users')->select('password','email')->where('id',$id)->first();
         $email = $user->email;
         
         if(empty($pass)){
-            return redirect()->Route('changepassfailadmin',array('id'=>$id ,'email'=>$email ,'alert'=>'Password is empty'))->with('pass','Password is empty');
+            return redirect()->Route('changepassfailadmin',array('id'=>$id ,'email'=>$email ,'alert'=>'Password không được trống !!'))->with('pass','Password không được trống !!');
         }
         elseif(empty($newpass)){
-            return redirect()->Route('changepassfailadmin',array('id'=>$id ,'email'=>$email ,'alert'=>'New Password is empty'))->with('new','New Password is empty');
+            return redirect()->Route('changepassfailadmin',array('id'=>$id ,'email'=>$email ,'alert'=>'New Password không được trống !!'))->with('new','New Password không được trống !!');
         }elseif(empty($confirmpass)){
-            return redirect()->Route('changepassfailadmin',array('id'=>$id ,'email'=>$email ,'alert'=>'Corfirm Password is empty'))->with('confirm','Corfirm Password is empty');
+            return redirect()->Route('changepassfailadmin',array('id'=>$id ,'email'=>$email ,'alert'=>'Corfirm Password không được trống !!'))->with('confirm','Corfirm Password không được trống !!');
         }elseif(!password_verify($pass,$user->password)){
-            return redirect()->Route('changepassfailadmin',array('id'=>$id ,'email'=>$email ,'alert'=>'Your password is incorrect'))->with('pass','Your password is incorrect');
+            return redirect()->Route('changepassfailadmin',array('id'=>$id ,'email'=>$email ,'alert'=>'Password này không đúng !!'))->with('pass','Password này không đúng !!');
         }elseif($newpass != $confirmpass){
-            return redirect()->Route('changepassfailadmin',array('id'=>$id ,'email'=>$email ,'alert'=>'New password and confirmpass are diffirent!'));
+            return redirect()->Route('changepassfailadmin',array('id'=>$id ,'email'=>$email ,'alert'=>'New Password and Confirm Password khác nhau !!'));
         }
 
         return $next($request); 

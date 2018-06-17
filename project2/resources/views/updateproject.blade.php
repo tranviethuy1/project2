@@ -5,7 +5,7 @@
 		$name = session('data')['name'];
 	?>
 	<div class="row">
-		<div class ="col-md-3"><legend class ="text-info" style="font-family: Anquila;font-style:italic;">Update Project</legend></div>
+		<legend class ="text-info" style="font-family: Anquila;">Cập nhật chuyến công tác </legend>
 	</div>
 	<div class="row">
 		<div class="col-md-12">	
@@ -14,7 +14,7 @@
 			    <div class="form-group">
 			    	<div class="row">
 				    	<div class="col-md-1"></div>
-				     	<label class="control-label col-md-2" for="pn">Project Name:</label>
+				     	<label class="control-label col-md-2" for="pn">Project Name*:</label>
 				      	<div class="col-md-4">
 				        	<input type="text" class="form-control" id="projectname" name="project_name" value="{{$project->name_project}}">
 							@if(session()->has('name'))
@@ -28,7 +28,7 @@
 			    <div class="form-group">
 			    	<div class="row">
 				    	<div class="col-md-1"></div>
-				     	<label class="control-label col-md-2" for="ds">Date start:</label>
+				     	<label class="control-label col-md-2" for="ds">Date start*:</label>
 				      	<div class="col-md-4">
 				        	<input type="text" class="form-control" id="date_start" name="date_start" value="{{$project->date_start}}">
 							@if(session()->has('date'))
@@ -42,7 +42,7 @@
 			    <div class="form-group">
 				    <div class="row">
 				    	<div class="col-md-1"></div>
-				      	<label class="control-label col-md-2" for="de">Describe:</label>
+				      	<label class="control-label col-md-2" for="de">Describe*:</label>
 				      	<div class="col-md-6">          
 				        	<textarea rows="4" id = "describe" class="ckeditor" cols="50" name="describe">{{$project->describe}}</textarea>
 							@if(session()->has('describe'))
@@ -52,13 +52,22 @@
 				      	<div class="col-md-3"><span class="text-info">(** Describe about project **)</span></div>
 				    </div>  
 			    </div>
+
+			    <div class="form-group">
+				    <div class="row">
+				    	<div class="col-md-3"></div>
+				    	<div class="col-md-4">
+				    		<span class="text-danger"> Chú ý * thông tin bắt buộc </span>
+				    	</div>
+				    </div>
+				</div>    			    
 				
 				<div class="form-group">
 					<div class="row">
 				    	<div class="col-md-3"></div>
-				    	<div class="col-md-4">
-				    		<button type="submit" class="btn btn-success"> Update Project</button>
-				    		<a href="{{Route('admin')}}" class="btn btn-primary"> Back To Home</a>
+				    	<div class="col-md-5">
+				    		<button type="submit" class="btn btn-success"> Update Project <i class="fas fa-edit"></i></button>
+				    		<a href="{{Route('admin')}}" class="btn btn-primary"> Back To Home <i class="fas fa-arrow-circle-right"></i></a>
 				    	</div>
 				    </div>								
 				</div>

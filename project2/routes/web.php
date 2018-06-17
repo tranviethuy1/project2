@@ -169,6 +169,8 @@ Route::get('projectmanager','ProjectController@showListProject')->name('projectm
 
 Route::get('searchproject','SearchController@searchProject')->name('searchproject');
 
+Route::post('findproject','ProjectController@findProject')->name('findproject');
+
 Route::get('admintemplate','AdminController@redirectAdminTemplate')->name('admintemplate');
 
 Route::post('addtemplate','AdminController@addTemplate')->name('addtemplate')->middleware('checkaddtemplate');
@@ -189,4 +191,11 @@ Route::get('printadvance/{id_advance}','PdfController@downloadAdvance')->name('p
 
 Route::get('printresult/{id_result}','PdfController@downloadResult')->name('printresult');
 
+Route::get('statistic','ProjectController@showStatistic')->name('statistic');
+
+Route::get('searchstatisticmonth','SearchController@searchStatisticMonth')->name('searchstatisticmonth');
+
+Route::get('searchstatisticyear','SearchController@searchStatisticYear')->name('searchstatisticyear');
+
+Route::post('findstatistic','AdminController@findStatistic')->name('findstatistic');
 
